@@ -1,0 +1,26 @@
+{
+  "name": "magakovka",
+  "version": "1.0.0",
+  "description": "megakovka.com.ua - production",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "VodooSavage",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.0",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "exceljs": "^0.8.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "hbs": "^4.0.1",
+    "mongoose": "^4.13.4",
+    "morgan": "~1.9.0",
+    "mysql": "^2.15.0",
+    "redis": "^2.8.0",
+    "serve-favicon": "~2.4.5"
+  }
+}

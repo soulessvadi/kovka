@@ -1,0 +1,782 @@
+
+<!-- <video loop="" id="video" style="display: block;opacity: 1;transform: translate3d(0px, 0px, 0px);width: 640px;height: auto;position: fixed;float: left;">
+<source src="video/firev.mp4" type="video/mp4">
+<source src="video/firev.webm" type="video/webm">
+<source src="video/bg-2.ogv" type="video/ogg">
+</video>
+<script type="text/javascript">
+var video = document.getElementById("video");
+video.play();
+</script> -->
+
+{{> preloader }}
+
+<div id="content-block">
+
+  {{> header }}
+
+    <div class="sidebar-content-wrapper fixed-header-margin center-container">
+        <div class="content-center">
+            <div class="content-push">
+                <div class="navigation-banner-swiper">
+                    <div class="swiper-container" data-autoplay="5000" data-loop="1" data-speed="500" data-center="0" data-slides-per-view="1">
+                        <div class="swiper-wrapper">
+                          {{#each banners}}
+                            <div class="swiper-slide active" data-val="0">
+                                <div class="navigation-banner-wrapper light-text {{#iseven @index}} align-1 {{else}} align-3 {{/iseven}}" style="background-image: url(img/{{ this.cover }});">
+                                    <div class="navigation-banner-content">
+                                        <div class="cell-view">
+                                            <h2 class="subtitle">{{ this.subtitle }}</h2>
+                                            <h1 class="title">{{ this.title }}</h1>
+                                            <div class="description" style="color: #beaa99;">{{ this.description }}</div>
+                                            <div class="info">
+                                                {{#if this.buttons }}
+                                                  {{#each this.buttons}}
+                                                    <a class="button style-1" href="{{ this.uri }}" onclick="{{ this.onclick }}">{{ this.text }}</a>
+                                                  {{/each}}
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                        <div class="clear"></div>
+                        <div class="pagination"></div>
+                    </div>
+                </div>
+
+                <div class="mozaic-banners-wrapper type-2">
+                    <div class="row">
+                        {{#each categories}}
+                          <div class="banner-column col-md-4 col-sm-6">
+                              <!-- background-image: url(img/categories/{{ this.cover }}); -->
+                              <a class="mozaic-banner-entry type-3" style="" href="/catalog/{{ this.alias }}">
+                                  <span class="mozaic-banner-content">
+                                    <span class="subtitle">{{ this.name }}</span>
+                                    <span class="title" style="font-size:24px;">В КАТАЛОГ</span>
+                                    <span class="description"><strong>{{ this.products }}</strong> позиций</span>
+                                  </span>
+                              </a>
+                          </div>
+                        {{/each}}
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div class="information-blocks products-grid">
+                    <div class="tabs-container">
+                        <div class="swiper-tabs tabs-switch">
+                            <div class="title">ТОВАРЫ</div>
+                            <div class="list">
+                                <a class="block-title tab-switcher active">АКЦИИ</a>
+                                <a class="block-title tab-switcher">БЕСТСЕЛЛЕРЫ</a>
+                                <a class="block-title tab-switcher">НОВИНКИ</a>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="tabs-entry">
+                                <div class="row">
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-1.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-2.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-3.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-4.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-4.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-3.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-2.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-1.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tabs-entry">
+                                <div class="row">
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-1.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-2.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-3.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-4.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-4.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-3.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-2.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-1.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tabs-entry">
+                                <div class="row">
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-1.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-2.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-3.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-4.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-4.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-3.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-2.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                    <div class="custom-col-4-in-row">
+                                        <div class="product-slide-entry">
+                                            <div class="product-image">
+                                                <img src="img/product-wine-1.jpg" alt="" />
+                                                <a class="top-line-a left"><i class="fa fa-retweet"></i></a>
+                                                <a class="top-line-a right"><i class="fa fa-heart"></i></a>
+                                                <div class="bottom-line">
+                                                    <a class="bottom-line-a"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            <a class="tag" href="#">Men clothing</a>
+                                            <a class="title" href="#">Blue Pullover Batwing Sleeve Zigzag</a>
+                                            <div class="rating-box">
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                                <div class="star"><i class="fa fa-star"></i></div>
+                                            </div>
+                                            <div class="price">
+                                                <div class="prev">$199,99</div>
+                                                <div class="current">$119,99</div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="information-blocks">
+                    <div class="client-logo-wrapper">
+                        <div class="swiper-container" data-autoplay="0" data-loop="0" data-speed="500" data-center="0" data-slides-per-view="responsive" data-xs-slides="2" data-int-slides="2" data-sm-slides="3" data-md-slides="4" data-lg-slides="5" data-add-slides="6">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide no-shadow active" data-val="0">
+                                    <a href="#"><img class="client-logo" src="img/client-logo.jpg" alt="" /></a>
+                                </div>
+                                <div class="swiper-slide no-shadow active" data-val="1">
+                                    <a href="#"><img class="client-logo" src="img/client-logo-1.jpg" alt="" /></a>
+                                </div>
+                                <div class="swiper-slide no-shadow active" data-val="2">
+                                    <a href="#"><img class="client-logo" src="img/client-logo-2.jpg" alt="" /></a>
+                                </div>
+                                <div class="swiper-slide no-shadow active" data-val="3">
+                                    <a href="#"><img class="client-logo" src="img/client-logo-3.jpg" alt="" /></a>
+                                </div>
+                                <div class="swiper-slide no-shadow active" data-val="4">
+                                    <a href="#"><img class="client-logo" src="img/client-logo-4.jpg" alt="" /></a>
+                                </div>
+                                <div class="swiper-slide no-shadow active" data-val="5">
+                                    <a href="#"><img class="client-logo" src="img/client-logo-5.jpg" alt="" /></a>
+                                </div>
+                            </div>
+                            <div class="pagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+{{> modals }}

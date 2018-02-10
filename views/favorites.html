@@ -1,0 +1,95 @@
+<div id="content-block">
+    <div class="content-center fixed-header-margin">
+
+        {{> header2 }}
+
+        <div class="content-push">
+
+          <div class="breadcrumb-box">
+            <a href="/">ГЛАВНАЯ</a>
+            <a> КОРЗИНА </a>
+          </div>
+
+              <div class="information-blocks">
+                  <div class="row">
+                      <div class="col-sm-9 col-sm-push-3">
+                          <div class="wishlist-header hidden-xs">
+                              <div class="title-1">Описание товара</div>
+                              <div class="title-2">Заказ</div>
+                          </div>
+                          <div class="wishlist-box">
+                            {{#if favorites.list }}
+                              <div id="cart-table-overlay">
+                                <p>Удалить товар из избранных? &nbsp;&nbsp;&nbsp; <a class="button style-6 confirm">Да</a> <a class="button style-8 decline">Отмена</a></p>
+                              </div>
+                              {{#each favorites.list }}
+                              <div class="wishlist-entry favorite">
+                                  <div class="column-1">
+                                      <div class="traditional-cart-entry">
+                                          <a class="image" style="background-image: url(/img/products/{{ this.cover }});"></a>
+                                          <div class="content">
+                                            <div class="cell-view">
+                                                <a href="/catalog/{{ this.cat_alias }}" class="tag">{{ this.cat_name }}</a>
+                                                <a href="/catalog/{{ this.cat_alias }}/{{ this.sku }}" class="title">{{ this.name }}</a>
+                                                <div class="inline-description">{{ this.sku }}</div>
+                                                <div class="inline-description">{{ this.price }}₴</div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="column-2 product-slide-entry">
+                                      <a class="button style-14 to-cart-button" {{#unless this.in_cart }} onclick="__.toCart(event, {{ this.prod_id }})" {{/unless }} >
+                                        <span> {{#unless this.in_cart }} в корзину {{/unless }} {{#if this.in_cart }} в корзине {{/if }}</span>
+                                      </a>
+                                      <a class="remove-button" onclick="__.removeFromFavoritesPopup(event, {{ this.id }})"><i class="fa fa-times"></i></a>
+                                  </div>
+                              </div>
+                            {{/each }}
+                          {{/if }}
+
+                          <div class="wishlist-entry empty-message" style="{{#if favorites.list }} display:none; {{/if}}">
+                              <div class="traditional-cart-entry">
+                                  <div style="text-align:center; font-size:20px; text-transform:uppercase;line-height:27px;">
+                                    Ваш список избранного пуст <br>
+                                    <a href="/catalog">К покупкам</a>
+                                  </div>
+                              </div>
+                          </div>
+
+                          </div>
+                      </div>
+
+                      <div class="col-sm-3 col-sm-pull-9 blog-sidebar">
+
+                          <div class="information-blocks">
+                              <div class="categories-list account-links">
+                                  <div class="block-title size-3">Каталог</div>
+                                  <div class="sidebar-navigation">
+                                    <div class="list">
+                                      {{#each categories }}
+                                      <a class="entry {{#equals this.alias ../category.alias }} active {{/equals }}" href="/catalog/{{ this.alias }}">
+                                        <i class="fa fa-angle-right"></i><span>{{ this.name }}</span>
+                                      </a>
+                                      {{/each}}
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                      </div>
+
+                  </div>
+              </div>
+
+          {{>featured }}
+
+          {{>footer }}
+
+      </div>
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+{{> modals }}

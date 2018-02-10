@@ -1,0 +1,123 @@
+<div id="content-block">
+    <div class="content-center fixed-header-margin">
+
+        {{> header2 }}
+
+        <div class="content-push">
+
+            <div class="breadcrumb-box">
+                <a href="/">ГЛАВНАЯ</a>
+                <a>КАТАЛОГ</a>
+            </div>
+
+            <div class="information-blocks" id="search-results" style="display: none;">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="row">
+                          <div class="col-xs-12">
+                              <p style="font-size:20px;padding-bottom: 45px;">
+                                Найдено предложений : <strong class="results-count">3</strong>
+                                <a class="pull-right" style="font-size: 22px; cursor: pointer;color: #c15244;" onclick="__.closeForm()">закрыть <i class="fa fa-close" style="font-size:19px;"></i></a>
+                              </p>
+                          </div>
+                        </div>
+                        <div class="page-selector">
+                            <div class="pages-box hidden-xs paginator">
+
+                            </div>
+                            <div class="shop-grid-controls">
+                                <div class="entry">
+                                    <div class="inline-text">Сортировать по</div>
+                                    <div class="simple-drop-down">
+                                        <select name="sort" onchange="__.search(event);">
+                                            <option value="1">стоимости</option>
+                                            <option value="2">названию</option>
+                                            <option value="3">коду товара</option>
+                                            <option value="4">популярности</option>
+                                        </select>
+                                    </div>
+                                    <div class="sort-button active sort"></div>
+                                </div>
+                                <div class="entry">
+                                    <div class="view-button grid active"><i class="fa fa-th"></i></div>
+                                    <div class="view-button list"><i class="fa fa-list"></i></div>
+                                </div>
+                                <div class="entry">
+                                    <div class="inline-text">Товаров на странице</div>
+                                    <div class="simple-drop-down" style="width: 75px;">
+                                        <select name="ppp" onchange="__.search(event);">
+                                            <option value="8">8</option>
+                                            <option value="16">16</option>
+                                            <option value="24">24</option>
+                                        </select>
+                                    </div>
+                                    <div class="inline-text"></div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="row shop-grid grid-view" id="search-results-products">
+                            <div class="content-wrapper">
+
+                            </div>
+                        </div>
+                        <div class="page-selector">
+                            <div class="description">Показано: <strong class="onpage-count">0</strong> из <strong class="results-count">0</strong></div>
+                            <div class="pages-box paginator">
+
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="information-blocks">
+
+              <!-- <div class="mozaic-banners-wrapper type-2">
+                  <div class="row">
+                      {{#each categories}}
+                        <div class="banner-column col-md-4 col-sm-6">
+                            <a class="mozaic-banner-entry type-3" style="background-image: url(/img/categories/{{ this.cover }});" href="/catalog/{{ this.alias }}">
+                                <span class="mozaic-banner-content">
+                                  <span class="subtitle" style="font-size:20px;">{{ this.name }}</span>
+                                  <span class="title" style="font-size:18px;">К ПОКУПКАМ</span>
+                                  <span class="description"><strong>{{ this.products }}</strong> позиций</span>
+                                </span>
+                            </a>
+                        </div>
+                      {{/each}}
+                      <div class="clear"></div>
+                  </div>
+              </div> -->
+
+              <div class="portfolio-container type-3">
+                  {{#each categories}}
+                  <div class="portfolio-entry col-xs-4">
+                      <div class="image" style="background-image: url(/img/categories/{{ this.cover }}); height: 240px;">
+                          <div class="hover-layer"></div>
+                          <div class="title-info">
+                              <a href="#" class="title">{{ this.name }}</a>
+                              <div class="subtitle">Товарных позиций: <strong>{{ this.products }}</strong></div>
+                              <div class="actions">
+                                  <a href="/catalog/{{ this.alias }}" class="action-button"><i class="fa fa-arrow-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <a href="/catalog/{{ this.alias }}" class="readmore">К покупкам</a>
+                  </div>
+                  {{/each}}
+                  <div class="clear"></div>
+              </div>
+            </div>
+
+            {{> featured }}
+            {{> footer }}
+        </div>
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+{{> modals }}

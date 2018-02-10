@@ -1,0 +1,266 @@
+<div id="content-block">
+
+    <div class="content-center fixed-header-margin">
+
+        {{> header2 }}
+
+        <div class="content-push">
+
+            <div class="breadcrumb-box">
+              <a href="/">ГЛАВНАЯ</a>
+              <a> КОРЗИНА </a>
+            </div>
+
+            <div id="cart-table-wrapper" class="information-blocks">
+              <div class="content-wrapper">
+                <div class="table-responsive">
+                    <div id="cart-table-overlay">
+                      <p>Удалить товар из корзины? &nbsp;&nbsp;&nbsp; <a class="button style-6 confirm">Да</a> <a class="button style-8 decline">Отмена</a></p>
+                    </div>
+                    <table class="cart-table">
+                        <tr>
+                            <th class="column-1">Наименование</th>
+                            <th class="column-2">Цена</th>
+                            <th class="column-3">Кол-во</th>
+                            <th class="column-4">Сумма</th>
+                            <th class="column-5"></th>
+                        </tr>
+                        {{#if cart.list }}
+                          {{#each cart.list }}
+                            <tr class="product-row" data-rel="{{ this.id }}">
+                              <td>
+                                  <div class="traditional-cart-entry">
+                                      <a class="image" style="background-image: url(/img/products/{{ this.cover }});"></a>
+                                      <div class="content">
+                                          <div class="cell-view">
+                                              <a href="/catalog/{{ this.cat_alias }}" class="tag">{{ this.cat_name }}</a>
+                                              <a href="/catalog/{{ this.cat_alias }}/{{ this.sku }}" class="title">{{ this.name }}</a>
+                                              <div class="inline-description">{{ this.sku }}</div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </td>
+                              <td>{{ this.price }}₴</td>
+                              <td>
+                                  <div class="quantity-selector detail-info-entry">
+                                      <div class="entry number-minus">&nbsp;</div>
+                                      <div class="entry number">{{ this.quantity }}</div>
+                                      <div class="entry number-plus">&nbsp;</div>
+                                      <input type="hidden" class="quantity-value" value="{{ this.quantity }}" data-rel="{{ this.id }}">
+                                  </div>
+                              </td>
+                              <td><div class="subtotal"><span class="subtotal-value">{{ this.sum }}</span>₴</div></td>
+                              <td><a class="remove-button" onclick="__.removeFromCartPopup(event, {{ this.id }})"><i class="fa fa-times"></i></a></td>
+                            </tr>
+                          {{/each }}
+                        {{/if }}
+
+                        <tr class="empty-message" style="{{#if cart.list }} display:none; {{/if}}">
+                          <td colspan="5">
+                            <div class="traditional-cart-entry">
+                              <p class="text-center" style="text-transform:uppercase;">
+                                Ваша корзина пуста <br>
+                                <a href="/catalog">К покупкам</a>
+                              </p>
+                            </div>
+                          </td>
+                        </tr>
+                    </table>
+                </div>
+              <div class="cart-submit-buttons-box">
+                  <a class="button style-15" href="/catalog">НАЗАД В КАТАЛОГ</a>
+                  {{#if null }}
+                  <a class="button style-15 clear-cart">Очистить корзину</a>
+                  {{/if }}
+              </div>
+              {{#if cart.list }}
+              <div class="row" id="order-form-wrapper">
+                <form class="order-form">
+                  <div class="col-md-4 information-entry">
+                      <h3 class="cart-column-title">Данные покупателя <span class="inline-label red">Обязательно</span></h3>
+                      <label>Полное имя</label>
+                      <input type="text" name="customer" placeholder="ФИО" class="simple-field size-1">
+                      <label>Номер телефона</label>
+                      <input type="text" name="phone" placeholder="(099) 999-99-99" class="simple-field size-1 phone-mask">
+                      <label>Email</label>
+                      <input type="text" name="email" placeholder="email@mail.com" class="simple-field size-1">
+                  </div>
+                  <div class="col-md-4 information-entry">
+                      <h3 class="cart-column-title">Дополнительно</h3>
+                      <label>Перевозчик</label>
+                      <div class="simple-drop-down simple-field size-1">
+                          <select name="carrier">
+                              <option value="1">"Нова Пошта"</option>
+                              <option value="2">"Деливери"</option>
+                              <option value="3">"Ин Тайм"</option>
+                          </select>
+                      </div>
+                      <label>Комментарий</label>
+                      <div class="additional-data">
+                          <textarea class="simple-field size-108" name="comment"></textarea>
+                      </div>
+                  </div>
+                  <div class="col-md-4 information-entry">
+                      <h3 class="cart-column-title">Итоги</h3>
+                      <div class="cart-summary-box">
+                        <div class="sub-total">Стоимость доставки будет подсчитана при подтверждении заявки.</div>
+                        <div class="grand-total">Сумма к оплате: <span class="cart-total">{{ cart.total }}</span>₴</div>
+                        <div class="sub-total" style="text-align:left;">
+                          <label class="checkbox-entry" style="font-size:10px;">
+                              <input type="checkbox" name="terms"> <span class="check"></span> Подтверждаю согласие с <a href="/terms" target="_blank">пользовательским соглашением</a>
+                          </label>
+                        </div>
+                        <a class="button style-10" onclick="__.createOrder(event);">ОФОРМИТЬ ЗАКАЗ</a>
+                      </div>
+                  </div>
+                </form>
+              </div>
+              {{/if }}
+            </div>
+          </div>
+            <!--
+            <div class="information-blocks">
+                <div class="row">
+                    <div class="col-sm-4 information-entry">
+                        <h3 class="block-title inline-product-column-title">Featured products</h3>
+                        <div class="inline-product-entry">
+                            <a href="#" class="image"><img alt="" src="img/product-image-inline-1.jpg"></a>
+                            <div class="content">
+                                <div class="cell-view">
+                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
+                                    <div class="price">
+                                        <div class="prev">$199,99</div>
+                                        <div class="current">$119,99</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="inline-product-entry">
+                            <a href="#" class="image"><img alt="" src="img/product-image-inline-2.jpg"></a>
+                            <div class="content">
+                                <div class="cell-view">
+                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
+                                    <div class="price">
+                                        <div class="prev">$199,99</div>
+                                        <div class="current">$119,99</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="inline-product-entry">
+                            <a href="#" class="image"><img alt="" src="img/product-image-inline-3.jpg"></a>
+                            <div class="content">
+                                <div class="cell-view">
+                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
+                                    <div class="price">
+                                        <div class="prev">$199,99</div>
+                                        <div class="current">$119,99</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 information-entry">
+                        <h3 class="block-title inline-product-column-title">Featured products</h3>
+                        <div class="inline-product-entry">
+                            <a href="#" class="image"><img alt="" src="img/product-image-inline-1.jpg"></a>
+                            <div class="content">
+                                <div class="cell-view">
+                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
+                                    <div class="price">
+                                        <div class="prev">$199,99</div>
+                                        <div class="current">$119,99</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="inline-product-entry">
+                            <a href="#" class="image"><img alt="" src="img/product-image-inline-2.jpg"></a>
+                            <div class="content">
+                                <div class="cell-view">
+                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
+                                    <div class="price">
+                                        <div class="prev">$199,99</div>
+                                        <div class="current">$119,99</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="inline-product-entry">
+                            <a href="#" class="image"><img alt="" src="img/product-image-inline-3.jpg"></a>
+                            <div class="content">
+                                <div class="cell-view">
+                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
+                                    <div class="price">
+                                        <div class="prev">$199,99</div>
+                                        <div class="current">$119,99</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 information-entry">
+                        <h3 class="block-title inline-product-column-title">Featured products</h3>
+                        <div class="inline-product-entry">
+                            <a href="#" class="image"><img alt="" src="img/product-image-inline-1.jpg"></a>
+                            <div class="content">
+                                <div class="cell-view">
+                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
+                                    <div class="price">
+                                        <div class="prev">$199,99</div>
+                                        <div class="current">$119,99</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="inline-product-entry">
+                            <a href="#" class="image"><img alt="" src="img/product-image-inline-2.jpg"></a>
+                            <div class="content">
+                                <div class="cell-view">
+                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
+                                    <div class="price">
+                                        <div class="prev">$199,99</div>
+                                        <div class="current">$119,99</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="inline-product-entry">
+                            <a href="#" class="image"><img alt="" src="img/product-image-inline-3.jpg"></a>
+                            <div class="content">
+                                <div class="cell-view">
+                                    <a href="#" class="title">Ladies Pullover Batwing Sleeve Zigzag</a>
+                                    <div class="price">
+                                        <div class="prev">$199,99</div>
+                                        <div class="current">$119,99</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+            {{> footer }}
+        </div>
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+{{> modals }}

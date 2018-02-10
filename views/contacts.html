@@ -1,0 +1,90 @@
+<div id="content-block">
+    <div class="content-center fixed-header-margin">
+
+        {{> header2 }}
+
+        <div class="content-push">
+
+          <div class="breadcrumb-box">
+            <a href="/">ГЛАВНАЯ</a>
+            <a> КОНТАКТЫ </a>
+          </div>
+
+          <div class="information-blocks">
+              <div class="row">
+                  <div class="col-md-4 information-entry">
+                      <h3 class="block-title main-heading">Связь с Нами</h3>
+                      <div class="article-container style-1">
+                          <p>Если у Вас есть вопросы, предложения, жалобы  - будьте свободны позвонить или написать нам.</p>
+                          <h5>Наши телефоны</h5>
+                          <p>
+                            Kyivstart: <a href="tel:(099) 999-99-99">(099) 999-99-99</a><br>
+                            Vodafone: <a href="tel:(099) 999-99-99">(099) 999-99-99</a><br>
+                            Life: <a href="tel:(099) 999-99-99">(099) 999-99-99</a><br>
+                            Viber: <a href="tel:(099) 999-99-99">(099) 999-99-99</a>
+                          </p>
+                          <h5>Почта</h5>
+                          <p>
+                            Сотрудничество: <a href="mailto:trades@megakovka.com.ua">trades@megakovka.com.ua</a> <br>
+                            Вопросы: <a href="mailto:info@megakovka.com.ua">info@megakovka.com.ua</a> <br>
+                            Поддержка: <a href="mailto:support@megakovka.com.ua">support@megakovka.com.ua</a> <br>
+                          </p>
+                      </div>
+                      <div class="share-box detail-info-entry">
+                          <div class="title">Мы в социальных сетях</div>
+                          <div class="socials-box">
+                              <a href="#"><i class="fa fa-facebook"></i></a>
+                              <a href="#"><i class="fa fa-twitter"></i></a>
+                              <a href="#"><i class="fa fa-google-plus"></i></a>
+                              <a href="#"><i class="fa fa-youtube"></i></a>
+                              <a href="#"><i class="fa fa-linkedin"></i></a>
+                              <a href="#"><i class="fa fa-instagram"></i></a>
+                          </div>
+                          <div class="clear"></div>
+                      </div>
+                  </div>
+
+                  <div class="col-md-8 information-entry" id="contact-form-wrapper">
+                      <div class="content-wrapper">
+                        <h3 class="block-title main-heading">Задайте нам свой вопрос</h3>
+                        <form class="contact-form">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Ваше имя <span>*</span></label>
+                                    <input name="fname"  class="simple-field" type="text" placeholder="Имя" required="" value="">
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Ваша фамилия</label>
+                                    <input name="lname" class="simple-field" type="text" placeholder="Фамилия" value="">
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label>Email для фидбэка <span>*</span></label>
+                                    <input name="email" class="simple-field" type="email" placeholder="mail@mail.com" required="" value="">
+                                    <label>Телефон</label>
+                                    <input name="phone" class="simple-field phone-mask" type="text" placeholder="mail@mail.com" required="" value="">
+                                    <label>Сообщение <span>*</span></label>
+                                    <textarea name="message" class="simple-field" placeholder="" required=""></textarea>
+                                    <button class="button style-10" onclick="__.contactMessage(event)">Отправить</button>
+                                </div>
+                            </div>
+                        </form>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+          {{>featured }}
+
+          {{>footer }}
+
+      </div>
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+{{> modals }}

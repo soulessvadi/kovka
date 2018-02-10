@@ -1,0 +1,117 @@
+<div class="search-box popup">
+    <form>
+        <div class="search-button">
+            <i class="fa fa-search"></i>
+            <input type="submit" />
+        </div>
+        <div class="search-field">
+            <input type="text" value="" placeholder="Поиск по артикулу / названию товара" />
+        </div>
+    </form>
+</div>
+
+<div class="cart-box popup">
+    <div class="popup-container">
+      <div class="cart-content">
+        <div class="content-wrapper">
+          <div class="cart-entry">
+            <p style="text-align:center;">Корзина пуста</p>
+          </div>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="subtotal"> &nbsp; </div>
+        <div class="grandtotal">Всего: <span class="cart-total">0.00</span> ₴</div>
+      </div>
+      <div class="cart-buttons">
+        <div class="column">
+          <a class="button style-3">&nbsp;</a>
+          <div class="clear"></div>
+        </div>
+        <div class="column">
+          <a class="button style-4" href="/checkout">ЗАКАЗ</a>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+</div>
+
+<div id="product-popup" class="overlay-popup">
+    <div class="overflow">
+        <div class="table-view">
+            <div class="cell-view">
+                <div class="close-layer"></div>
+                <div class="popup-container" id="product-popup-wrapper">
+                  <div class="content-wrapper">
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-4 information-entry">
+                            <div class="product-preview-box">
+                                <div class="swiper-container initialized product-preview-swiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <div class="product-zoom-image">
+                                                <img src="/img/product-main-1.jpg" alt="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-8 information-entry">
+                            <form class="product-detail-box instant-order-form">
+                                <h1 class="product-title">T-shirt Basic Stampata</h1>
+                                <h3 class="product-subtitle">Loremous Clothing</h3>
+                                <div class="product-description detail-info-entry">402.04124.2</div>
+                                <div class="quantity-selector detail-info-entry">
+                                  <div class="detail-info-entry-title">Количество</div>
+                                  <div class="entry number-minus">&nbsp;</div>
+                                  <div class="entry number">1</div>
+                                  <div class="entry number-plus">&nbsp;</div>
+                                  <input type="hidden" class="quantity-value" value="1">
+                                </div>
+                                <div class="price detail-info-entry">
+                                    <div class="product-price" style="font-size:24px; letter-spacing:0.5px;"><span>70.00</span> ₴</div>
+                                    <div class="current total-price"><span>70.00</span> ₴</div>
+                                </div>
+                                <div class="information-entry">
+                                    <h3 class="cart-column-title">Данные покупателя <span class="inline-label red">Обязательно</span></h3>
+                                    <label>Полное имя</label>
+                                    <input type="text" name="ocustomer" placeholder="ФИО" class="simple-field size-1">
+                                    <label>Номер телефона</label>
+                                    <input type="text" name="ophone" placeholder="(099) 999-99-99" class="simple-field size-1 phone-mask">
+                                    <label>Email</label>
+                                    <input type="text" name="oemail" placeholder="email@mail.com" class="simple-field size-1">
+                                    <label></label>
+                                </div>
+                                <div class="detail-info-entry">
+                                    <a class="button style-12 pull-left" onclick="__.toOrder(event, products[x].id)">ЗАКАЗАТЬ</a>
+                                    <a class="button style-10 to-cart-button" onclick="__.toCart(event, products[x].id)"><span>В КОРЗИНУ</span></a>
+                                    <div class="clear"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="close-popup"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="overlay-popup" id="image-popup">
+    <div class="overflow">
+        <div class="table-view">
+            <div class="cell-view">
+                <div class="close-layer"></div>
+                <div class="popup-container">
+                    <img class="gallery-image" src="img/portfolio-1.jpg" alt="" />
+                    <div class="close-popup"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
