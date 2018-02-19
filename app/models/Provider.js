@@ -31,8 +31,68 @@ Provider.prototype.contactMessage = function(req, callback) {
     });
 };
 
+Provider.prototype.getPageSeo = function(page, callback) {
+    DB.execute("SELECT seo_title, seo_keys, seo_desc FROM menu WHERE id = " + page + " LIMIT 1", function(err, res) {
+        if(res) callback(null, res.pop());
+        else callback(err, null);
+    });
+};
+
+Provider.prototype.getAllProducts = function(session_id, callback) {
+    DB.execute("SELECT P.*, ROUND(P.price, 2) as price, C.name as cat_name, C.alias as cat_alias, "+
+      "(SELECT id FROM favorites WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_favorites, " +
+      "(SELECT id FROM cart WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_cart " +
+      "FROM products as P LEFT JOIN categories as C on C.id = P.cat_id WHERE P.publish = 1 AND C.id > 0 ORDER BY P.sku LIMIT 10000", function(err, res) {
+        if(res) callback(null, res);
+        else callback(err, null);
+    });
+};
+
+Provider.prototype.getFeaturedProducts = function(session_id, callback) {
+  Async.parallel({
+    stock: function (cb) {
+      DB.execute("SELECT P.*, ROUND(P.price, 2) as price, C.name as cat_name, C.alias as cat_alias, "+
+        "(SELECT id FROM favorites WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_favorites, " +
+        "(SELECT id FROM cart WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_cart " +
+        "FROM products as P LEFT JOIN categories as C on C.id = P.cat_id WHERE P.is_stock = 1 AND P.publish = 1 LIMIT 8", function(err, res) {
+          cb(err, res);
+      });
+    },
+    new: function (cb) {
+      DB.execute("SELECT P.*, ROUND(P.price, 2) as price, C.name as cat_name, C.alias as cat_alias, "+
+        "(SELECT id FROM favorites WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_favorites, " +
+        "(SELECT id FROM cart WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_cart " +
+        "FROM products as P LEFT JOIN categories as C on C.id = P.cat_id  WHERE P.is_new = 1 AND P.publish = 1 LIMIT 8", function(err, res) {
+          cb(err, res);
+      });
+    },
+    bestsellers: function (cb) {
+      DB.execute("SELECT P.*, ROUND(P.price, 2) as price, C.name as cat_name, C.alias as cat_alias, "+
+        "(SELECT id FROM favorites WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_favorites, " +
+        "(SELECT id FROM cart WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_cart " +
+        "FROM products as P LEFT JOIN categories as C on C.id = P.cat_id WHERE P.is_bestseller = 1 AND P.publish = 1 LIMIT 8", function(err, res) {
+          cb(err, res);
+      });
+    }
+  }, function(err, result) {
+     if(result) callback(err, result);
+     else callback(err, null);
+  });
+};
+
+Provider.prototype.getProduct = function(session_id, sku, callback) {
+  DB.execute("SELECT P.*, ROUND(P.price, 2) as price, C.name as cat_name, C.alias as cat_alias, "+
+    "(SELECT id FROM favorites WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_favorites, " +
+    "(SELECT id FROM cart WHERE prod_id = P.id AND guest_id = '" + session_id + "' LIMIT 1) as in_cart " +
+    "FROM products as P LEFT JOIN categories as C on C.id = P.cat_id WHERE  P.sku = '" + sku + "' LIMIT 1", function(err, res) {
+      if(res) callback(null, res.pop());
+      else callback(err, null);
+  });
+};
+
 Provider.prototype.addToFavorites = function(req, callback) {
   var self = this,
+      response = {},
       pid = req.p,
       sid = req.sid,
       uid = 0;
@@ -41,8 +101,8 @@ Provider.prototype.addToFavorites = function(req, callback) {
       var sku = res.pop().sku;
       DB.execute("DELETE FROM favorites WHERE guest_id = " + sid + " AND prod_id = " + pid, function(err, res) {
         DB.origin.query("INSERT INTO favorites SET ?", {'user_id':uid, 'guest_id':sid, 'prod_id':pid, 'created':Date.now()}, function(err, res) {
-          res.sku = sku;
-          callback(err, res);
+          response.sku = sku;
+          callback(err, response);
         });
       });
     } else {
@@ -54,6 +114,7 @@ Provider.prototype.addToFavorites = function(req, callback) {
 
 Provider.prototype.addToCart = function(req, callback) {
   var self = this,
+      response = {},
       pid = parseInt(req.p),
       qty = req.q ? req.q : 1,
       sid = req.sid,
@@ -63,8 +124,9 @@ Provider.prototype.addToCart = function(req, callback) {
       var sku = res.pop().sku;
       DB.execute("DELETE FROM cart WHERE guest_id = '" + sid + "' AND prod_id = " + pid, function(err, res) {
         DB.origin.query("INSERT INTO cart SET ?", {'user_id':uid, 'guest_id':sid, 'prod_id':pid, 'quantity':qty, 'created':Date.now()}, function(err, res) {
-          res.sku = sku;
-          callback(err, res);
+          console.log(sku);
+          response.sku = sku;
+          callback(err, response);
         });
       });
     } else {
@@ -444,7 +506,7 @@ Provider.prototype.getProductsHtml = function(products) {
   var result = '';
   if(products) {
     for(var x in products) {
-      result += '<div class="col-md-3 col-sm-4 shop-grid-item">'+
+      result += '<div class="col-md-3 col-sm-4 col-xs-6 shop-grid-item">'+
           '<div class="product-slide-entry shift-image">'+
               '<div class="product-image" style="background-image: url(/img/products/'+( products[x].cover && products[x].cover.length > 1 ? products[x].cover : 'default.png' )+');">'+
               '<a class="top-line-a right open-product" data-pid="' + products[x].id + '" title="Заказать в два клика"><i class="fa fa-clock-o" style="font-size:16px;"></i> <span>Мгновенный заказ</span></a>'+
@@ -456,8 +518,8 @@ Provider.prototype.getProductsHtml = function(products) {
                   '><i class="fa fa-shopping-cart" style="font-size:14px;"></i> ' +
                   '<span>' + ( !parseInt(products[x].in_cart) ? 'В корзину' : 'В корзине' ) + '</span></a></div></div>'+
               '</div>'+
-              '<a class="tag" href="/catalog/'+products[x].cat_alias+'/" target="_blank">'+products[x].cat_name+'</a>'+
-              '<a class="title" href="/catalog/'+products[x].cat_alias+'/'+products[x].sku+'/" target="_blank">'+products[x].name+'</a>'+
+              '<a class="tag" href="/catalog/'+products[x].cat_alias+'/" target="_blank" title="'+products[x].cat_name+'">'+products[x].cat_name+'</a>'+
+              '<a class="title" href="/catalog/'+products[x].cat_alias+'/'+products[x].sku+'/" target="_blank" title="'+products[x].name+'">'+products[x].name+'</a>'+
               '<div class="article-container style-1">'+
                   '<p>'+products[x].sku+'</p>'+
               '</div>'+
@@ -465,13 +527,12 @@ Provider.prototype.getProductsHtml = function(products) {
                   '<div class="prev"></div>'+
                   '<div class="current">'+products[x].price.toFixed(2)+' ₴</div>'+
               '</div>'+
+              '<div class="clear"></div>'+
               '<div class="list-buttons">'+
-                  '<a class="button style-10 to-cart-button" '+
-                  ( !parseInt(products[x].in_cart) ? 'onclick="__.toCart(event, ' + products[x].id + ')"' : '' ) +
-                  '><span>' + ( !parseInt(products[x].in_cart) ? 'В корзину' : 'В корзине' ) + '</span></a>'+
-                  '<a class="button style-11 to-favorites-button" '+
-                  ( !parseInt(products[x].in_favorites) ? 'onclick="__.toFavorites(event, ' + products[x].id + ')"' : '' ) +
-                  '><i class="fa fa-heart"></i> <span>В избранное</span></a>'+
+                  '<a class="button style-10 to-cart-button" '+( !parseInt(products[x].in_cart) ? 'onclick="__.toCart(event, ' + products[x].id + ')"' : '' )+
+                  '><span>'+( !parseInt(products[x].in_cart) ? 'В корзину' : 'В корзине' )+'</span></a>'+
+                  '<a class="button style-11 to-favorites-button" '+( !parseInt(products[x].in_favorites) ? 'onclick="__.toFavorites(event, ' + products[x].id + ')"' : '' )+
+                  '><i class="fa fa-heart"></i> <span>'+( !parseInt(products[x].in_favorites) ? 'В избранное' : 'В избранном' )+'</span></a>'+
               '</div>'+
           '</div>'+
           '<div class="clear"></div>'+

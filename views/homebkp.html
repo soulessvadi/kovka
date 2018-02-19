@@ -1,0 +1,108 @@
+
+<!-- <video loop="" id="video" style="display: block;opacity: 1;transform: translate3d(0px, 0px, 0px);width: 640px;height: auto;position: fixed;float: left;">
+<source src="video/firev.mp4" type="video/mp4">
+<source src="video/firev.webm" type="video/webm">
+<source src="video/bg-2.ogv" type="video/ogg">
+</video>
+<script type="text/javascript">
+var video = document.getElementById("video");
+video.play();
+</script> -->
+
+{{> preloader }}
+
+<div id="content-block">
+
+  {{> header }}
+
+    <div class="sidebar-content-wrapper fixed-header-margin center-container">
+        <div class="content-center">
+            <div class="content-push">
+                <div class="navigation-banner-swiper">
+                    <div class="swiper-container" data-autoplay="5000" data-loop="1" data-speed="500" data-center="0" data-slides-per-view="1">
+                        <div class="swiper-wrapper">
+                          {{#each banners}}
+                            <div class="swiper-slide active" data-val="0">
+                                <div class="navigation-banner-wrapper light-text {{#iseven @index}} align-1 {{else}} align-3 {{/iseven}}" style="background-image: url(img/{{ this.cover }});">
+                                    <div class="navigation-banner-content">
+                                        <div class="cell-view">
+                                            <h2 class="subtitle">{{ this.subtitle }}</h2>
+                                            <h1 class="title">{{ this.title }}</h1>
+                                            <div class="description" style="color: #beaa99;">{{ this.description }}</div>
+                                            <div class="info">
+                                                {{#if this.buttons }}
+                                                  {{#each this.buttons}}
+                                                    <a class="button style-1" href="{{ this.uri }}" onclick="{{ this.onclick }}">{{ this.text }}</a>
+                                                  {{/each}}
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                        <div class="clear"></div>
+                        <div class="pagination"></div>
+                    </div>
+                </div>
+
+                <!-- <div class="mozaic-banners-wrapper type-2">
+                    <div class="row">
+                        {{#each categories}}
+                          <div class="banner-column col-md-4 col-sm-6" style="background-image: url(img/categories/{{ this.cover }});">
+                              <a class="mozaic-banner-entry type-3" style="" href="/catalog/{{ this.alias }}">
+                                  <span class="mozaic-banner-content">
+                                    <span class="subtitle">{{ this.name }}</span>
+                                    <span class="title" style="font-size:24px;">В КАТАЛОГ</span>
+                                    <span class="description"><strong>{{ this.products }}</strong> позиций</span>
+                                  </span>
+                              </a>
+                          </div>
+                        {{/each}}
+                        <div class="clear"></div>
+                    </div>
+                </div> -->
+
+                <div class="portfolio-container type-1">
+                  <div class="row">
+                      {{#each categories}}
+                      <div class="col-sm-4 portfolio-entry">
+                          <div class="image">
+                              <img alt="" src="/img/portfolio-9.jpg">
+                              <div class="hover-layer">
+                                  <div class="info">
+                                      <div class="actions">
+                                          <a class="action-button open-image" href="#"><i class="fa fa-search"></i></a>
+                                          <a class="action-button" href="#"><i class="fa fa-link"></i></a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <a class="title" href="/catalog/{{ this.alias }}">{{ this.name }}</a>
+                          <div class="subtitle"><span class="comments-number">{{ this.products }} позиций</span></div>
+                      </div>
+                    {{/each}}
+                  </div>
+              </div>
+
+              {{> featuredtabs }}
+
+              <div class="information-blocks">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </p>
+              </div>
+
+          </div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+{{> modals }}

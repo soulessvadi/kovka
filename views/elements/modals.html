@@ -1,11 +1,11 @@
 <div class="search-box popup">
-    <form>
+    <form action="/catalog" id="search-from-popup" onsubmit="__.searchSubmit(event);">
         <div class="search-button">
             <i class="fa fa-search"></i>
             <input type="submit" />
         </div>
         <div class="search-field">
-            <input type="text" value="" placeholder="Поиск по артикулу / названию товара" />
+            <input type="text" value="{{ query.q }}" name="q" placeholder="Поиск по артикулу / названию товара" />
         </div>
     </form>
 </div>
@@ -108,7 +108,7 @@
             <div class="cell-view">
                 <div class="close-layer"></div>
                 <div class="popup-container">
-                    <img class="gallery-image" src="img/portfolio-1.jpg" alt="" />
+                    <img class="gallery-image" src="/img/portfolio-1.jpg" alt="" />
                     <div class="close-popup"></div>
                 </div>
             </div>

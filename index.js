@@ -9,7 +9,6 @@ var hbs = require('hbs');
 var fs = require('fs');
 var path = require('path');
 var router = require('./app/routes');
-
 const App = express();
 
 /* templating */
@@ -23,6 +22,11 @@ hbs.registerHelper('equals', function(a, b, opts) {
 });
 hbs.registerHelper('iseven', function(a, opts) {
   return !(a%2) ? opts.fn(this) : opts.inverse(this);
+});
+hbs.registerHelper('foreach', function(a, b, opts) {
+  var ret = "";
+  for(var i = 0; i < a.length && i < b; i++) ret = ret + opts.fn(a[i]);
+  return ret;
 });
 /* templating */
 

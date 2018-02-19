@@ -1,0 +1,123 @@
+<div class="information-blocks products-grid">
+    <div class="tabs-container">
+        <div class="swiper-tabs tabs-switch">
+            <div class="title">ТОВАРЫ</div>
+            <div class="list">
+                <a class="block-title tab-switcher active">АКЦИИ</a>
+                <a class="block-title tab-switcher">БЕСТСЕЛЛЕРЫ</a>
+                <a class="block-title tab-switcher">НОВИНКИ</a>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div>
+            <div class="tabs-entry">
+                <div class="row">
+                  {{#each featured.stock }}
+                    <div class="custom-col-4-in-row">
+                          <div class="product-slide-entry shift-image">
+                              <div class="product-image" style="background-image: url(/img/products/{{this.cover}});">
+                              <a class="top-line-a right open-product" data-pid="{{this.id}}" title="Заказать в два клика"><i class="fa fa-clock-o" style="font-size:16px;"></i> <span>Мгновенный заказ</span></a>
+                                  <div class="bottom-line"><div class="right-align"><a class="bottom-line-a square to-favorites-button" title="В избранное"
+                                  {{#unless this.in_favorites }} onclick="__.toFavorites(event, {{this.id}})" {{/unless}}><i class="fa fa-heart"></i></a></div>
+                                  <div class="left-align"><a class="bottom-line-a to-cart-button" title="Добавить товар в корзину" {{#unless this.in_cart }} onclick="__.toCart(event, {{this.id}})" {{/unless}}>
+                                  <i class="fa fa-shopping-cart" style="font-size:14px;"></i>
+                                  <span>{{#unless this.in_cart }} В корзину {{else}} В корзине {{/unless }}</span></a></div></div>
+                              </div>
+                              <a class="tag" href="/catalog/{{this.cat_alias}}/" target="_blank">{{this.cat_name}}</a>
+                              <a class="title" href="/catalog/{{this.cat_alias}}/{{this.sku}}/" target="_blank">{{this.name}}</a>
+                              <div class="article-container style-1">
+                                  <p>{{ this.sku }}</p>
+                              </div>
+                              <div class="price">
+                                  <div class="prev"></div>
+                                  <div class="current">{{this.price}} ₴</div>
+                              </div>
+                              <div class="list-buttons">
+                                  <a class="button style-10 to-cart-button" {{#unless this.in_cart }} onclick="__.toCart(event, {{this.id}})" {{/unless}}>
+                                    <span> {{#unless this.in_cart }} В корзину {{else}} В корзине {{/unless }} </span>
+                                  </a>
+                                  <a class="button style-11 to-favorites-button" {{#unless this.in_favorites }} onclick="__.toFavorites(event, {{this.id}})" {{/unless}}>
+                                    <i class="fa fa-heart"></i> <span>В избранное</span>
+                                  </a>
+                              </div>
+                          </div>
+                        <div class="clear"></div>
+                    </div>
+                    {{/each }}
+                </div>
+            </div>
+            <div class="tabs-entry">
+                <div class="row">
+                  {{#each featured.bestsellers }}
+                  <div class="custom-col-4-in-row">
+                        <div class="product-slide-entry shift-image">
+                            <div class="product-image" style="background-image: url(/img/products/{{this.cover}});">
+                            <a class="top-line-a right open-product" data-pid="{{this.id}}" title="Заказать в два клика"><i class="fa fa-clock-o" style="font-size:16px;"></i> <span>Мгновенный заказ</span></a>
+                                <div class="bottom-line"><div class="right-align"><a class="bottom-line-a square to-favorites-button" title="В избранное"
+                                {{#unless this.in_favorites }} onclick="__.toFavorites(event, {{this.id}})" {{/unless}}><i class="fa fa-heart"></i></a></div>
+                                <div class="left-align"><a class="bottom-line-a to-cart-button" title="Добавить товар в корзину" {{#unless this.in_cart }} onclick="__.toCart(event, {{this.id}})" {{/unless}}>
+                                <i class="fa fa-shopping-cart" style="font-size:14px;"></i>
+                                <span>{{#unless this.in_cart }} В корзину {{else}} В корзине {{/unless }}</span></a></div></div>
+                            </div>
+                            <a class="tag" href="/catalog/{{this.cat_alias}}/" target="_blank">{{this.cat_name}}</a>
+                            <a class="title" href="/catalog/{{this.cat_alias}}/{{this.sku}}/" target="_blank">{{this.name}}</a>
+                            <div class="article-container style-1">
+                                <p>{{ this.sku }}</p>
+                            </div>
+                            <div class="price">
+                                <div class="prev"></div>
+                                <div class="current">{{this.price}} ₴</div>
+                            </div>
+                            <div class="list-buttons">
+                                <a class="button style-10 to-cart-button" {{#unless this.in_cart }} onclick="__.toCart(event, {{this.id}})" {{/unless}}>
+                                  <span> {{#unless this.in_cart }} В корзину {{else}} В корзине {{/unless }} </span>
+                                </a>
+                                <a class="button style-11 to-favorites-button" {{#unless this.in_favorites }} onclick="__.toFavorites(event, {{this.id}})" {{/unless}}>
+                                  <i class="fa fa-heart"></i> <span>В избранное</span>
+                                </a>
+                            </div>
+                        </div>
+                      <div class="clear"></div>
+                  </div>
+                    {{/each }}
+                </div>
+            </div>
+            <div class="tabs-entry">
+                <div class="row">
+                  {{#each featured.new }}
+                  <div class="custom-col-4-in-row">
+                        <div class="product-slide-entry shift-image">
+                            <div class="product-image" style="background-image: url(/img/products/{{this.cover}});">
+                            <a class="top-line-a right open-product" data-pid="{{this.id}}" title="Заказать в два клика"><i class="fa fa-clock-o" style="font-size:16px;"></i> <span>Мгновенный заказ</span></a>
+                                <div class="bottom-line"><div class="right-align"><a class="bottom-line-a square to-favorites-button" title="В избранное"
+                                {{#unless this.in_favorites }} onclick="__.toFavorites(event, {{this.id}})" {{/unless}}><i class="fa fa-heart"></i></a></div>
+                                <div class="left-align"><a class="bottom-line-a to-cart-button" title="Добавить товар в корзину" {{#unless this.in_cart }} onclick="__.toCart(event, {{this.id}})" {{/unless}}>
+                                <i class="fa fa-shopping-cart" style="font-size:14px;"></i>
+                                <span>{{#unless this.in_cart }} В корзину {{else}} В корзине {{/unless }}</span></a></div></div>
+                            </div>
+                            <a class="tag" href="/catalog/{{this.cat_alias}}/" target="_blank">{{this.cat_name}}</a>
+                            <a class="title" href="/catalog/{{this.cat_alias}}/{{this.sku}}/" target="_blank">{{this.name}}</a>
+                            <div class="article-container style-1">
+                                <p>{{ this.sku }}</p>
+                            </div>
+                            <div class="price">
+                                <div class="prev"></div>
+                                <div class="current">{{this.price}} ₴</div>
+                            </div>
+                            <div class="list-buttons">
+                                <a class="button style-10 to-cart-button" {{#unless this.in_cart }} onclick="__.toCart(event, {{this.id}})" {{/unless}}>
+                                  <span> {{#unless this.in_cart }} В корзину {{else}} В корзине {{/unless }} </span>
+                                </a>
+                                <a class="button style-11 to-favorites-button" {{#unless this.in_favorites }} onclick="__.toFavorites(event, {{this.id}})" {{/unless}}>
+                                  <i class="fa fa-heart"></i> <span>В избранное</span>
+                                </a>
+                            </div>
+                        </div>
+                      <div class="clear"></div>
+                  </div>
+                    {{/each }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

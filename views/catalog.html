@@ -1,5 +1,5 @@
 <div id="content-block">
-    <div class="content-center fixed-header-margin">
+    <div class="content-center fixed-header-margin page-catalog">
 
         {{> header2 }}
 
@@ -74,37 +74,20 @@
 
             <div class="information-blocks">
 
-              <!-- <div class="mozaic-banners-wrapper type-2">
-                  <div class="row">
-                      {{#each categories}}
-                        <div class="banner-column col-md-4 col-sm-6">
-                            <a class="mozaic-banner-entry type-3" style="background-image: url(/img/categories/{{ this.cover }});" href="/catalog/{{ this.alias }}">
-                                <span class="mozaic-banner-content">
-                                  <span class="subtitle" style="font-size:20px;">{{ this.name }}</span>
-                                  <span class="title" style="font-size:18px;">К ПОКУПКАМ</span>
-                                  <span class="description"><strong>{{ this.products }}</strong> позиций</span>
-                                </span>
-                            </a>
-                        </div>
-                      {{/each}}
-                      <div class="clear"></div>
-                  </div>
-              </div> -->
-
               <div class="portfolio-container type-3">
                   {{#each categories}}
-                  <div class="portfolio-entry col-xs-4">
-                      <div class="image" style="background-image: url(/img/categories/{{ this.cover }}); height: 240px;">
+                  <div class="portfolio-entry col-xs-6 col-sm-6 col-md-4 col-lg-3">
+                      <div class="image" style="background-image: url(/img/categories/crop/{{ this.cover_crop }}); height: 240px;">
                           <div class="hover-layer"></div>
                           <div class="title-info">
-                              <a href="#" class="title">{{ this.name }}</a>
-                              <div class="subtitle">Товарных позиций: <strong>{{ this.products }}</strong></div>
+                              <a href="/catalog/{{ this.alias }}" title="{{ this.name }}" class="title">{{ this.name }}</a>
+                              <div class="subtitle">Изделий в группе : <strong>{{ this.products }}</strong></div>
                               <div class="actions">
-                                  <a href="/catalog/{{ this.alias }}" class="action-button"><i class="fa fa-arrow-right"></i></a>
+                                  <a href="/catalog/{{ this.alias }}" class="action-button" title="{{ this.name }}"><i class="fa fa-cart-plus"></i></a>
                               </div>
                           </div>
                       </div>
-                      <a href="/catalog/{{ this.alias }}" class="readmore">К покупкам</a>
+                      <a href="/catalog/{{ this.alias }}" class="readmore" title="{{ this.name }}">Далее в каталог</a>
                   </div>
                   {{/each}}
                   <div class="clear"></div>

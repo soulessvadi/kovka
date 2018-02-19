@@ -3,22 +3,24 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="/css/idangerous.swiper.css" rel="stylesheet" type="text/css" />
-    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href='http://fonts.googleapis.com/css?family=Spectral+SC%7CMontserrat%7CRaleway:300,400,500,600,700%7CDancing+Script%7CMontserrat:400,700%7CMerriweather:400,300italic%7CLato:400,700,900' rel='stylesheet' type='text/css' />
-		<link href="/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="/css/_.css" rel="stylesheet" type="text/css" />
-    <!--[if IE 9]>
-        <link href="css/ie9.css" rel="stylesheet" type="text/css" />
-    <![endif]-->
-  	<title>{{ title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"/>
+	<meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="/css/idangerous.swiper.css" rel="stylesheet" type="text/css" />
+  <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href='http://fonts.googleapis.com/css?family=Spectral+SC%7CMontserrat%7CRaleway:300,400,500,600,700%7CDancing+Script%7CMontserrat:400,700%7CMerriweather:400,300italic%7CLato:400,700,900' rel='stylesheet' type='text/css' />
+	<link href="/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="/css/_.css" rel="stylesheet" type="text/css" />
+	<title>{{ seo.seo_title }}</title>
+	<meta name="description" content="{{ seo.seo_desc }}">
+	<meta name="keywords" content="{{ seo.seo_keys }}">
+	<!--[if IE 9]>
+	<link href="css/ie9.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
 </head>
 
-<body class="style-20" style="background: url('/img/bs9.jpg') center no-repeat; background-attachment:fixed;background-size: 100%;">
+<body class="style-20">
 
 		{{{ body }}}
 

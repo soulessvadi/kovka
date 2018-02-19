@@ -1,0 +1,72 @@
+<div id="content-block">
+    <div class="content-center fixed-header-margin">
+
+        {{> header2 }}
+
+        <div class="content-push">
+
+            <div class="breadcrumb-box">
+              <a href="/">ГЛАВНАЯ</a>
+              <a> ПРАЙС-ЛИСТ </a>
+            </div>
+
+            <div class="information-blocks pricelists">
+              <div class="row">
+                <div class="col-md-12 information-entry">
+                  <div class="article-container style-1">
+                    <h2>ПРАЙС-ЛИСТ</h2>
+                      <div>
+                        <p>Оформление заказа возможно такими способами:</p>
+                        <p> - выбрать товар на нашем  сайте и нажать кнопку «купить», товар автоматически попадает в корзину , где необходимо будет указать количество,
+                                                      далее вы можете продолжить покупки или перейти в корзину для дальнейшего оформления заказа; <br>
+                            - заказ можно оформить по телефону, связавшись с нашим менеджером.
+                        </p>
+                        <p>Минимальной суммы заказ нет.</p>
+                        <p>Товар представленный на сайте гарантированно есть в наличии.</p>
+                      </div>
+                  </div>
+                  <div>
+                    <table class="compare-table">
+                      <thead>
+                        <tr>
+                          <td><b>#</b></td>
+                          <td><b>Артикул</b></td>
+                          <td><b>Название</b></td>
+                          <td><b>Стоимость</b></td>
+                          <td><b></b></td>
+                        </tr>
+                      </thead>
+                    </table>
+                    <div class="table-slider">
+                      <table class="compare-table compare-table-body">
+                        <tbody>
+                          {{#each products }}
+                            <tr>
+                                <td>{{ this.id }}</td>
+                                <td><b>{{ this.sku }}</b></td>
+                                <td>{{ this.name }}</td>
+                                <td><b>{{ this.price }}</b> ₴</td>
+                                <td><a class="open-product" data-pid="{{ this.id }}"><i class="fa fa-shopping-cart"></i></a></td>
+                            </tr>
+                          {{/each }}
+                        </tbody>
+                      </table>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="information-blocks">
+              <a class="button style-12" href="/pricelist/build" target="_blank"><img src="/img/xlsx-30.png" style="vertical-align:middle;" title="загрузить прайс-лист в .xlsx" alt="xls"> скачать прайс-лист</a>
+          </div>
+
+          {{> featured }}
+          {{> footer }}
+        </div>
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+{{> modals }}

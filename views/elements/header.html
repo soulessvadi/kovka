@@ -11,7 +11,7 @@
                 </div>
                 <div class="simple-search-form">
                     <form action="/catalog">
-                        <input type="text" name="q" placeholder="Поиск по каталогу">
+                        <input type="text" name="q" placeholder="Поиск по каталогу" required>
                         <div class="simple-submit">
                             <i class="fa fa-search"></i>
                             <input type="submit">
@@ -19,13 +19,13 @@
                     </form>
                 </div>
                 <div>
-                  <a class="header-functionality-entry open-cart-popup" href="">
+                  <a class="header-functionality-entry open-cart-popup" href="/checkout/">
                     <i class="fa fa-shopping-cart"></i>
                     <span>КОРЗИНА </span> &nbsp;
                     <b><span class="cart-total">0.00</span> ₴</b>
                   </a>
                 </div>
-                <div style="margin-top: 20px;">
+                <div class="header-functionality-entry favorites">
                   <a class="header-functionality-entry" href="/favorites">
                     <i class="fa fa-heart"></i>
                     <span>ИЗБРАННОЕ </span> &nbsp;
@@ -58,7 +58,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                           <ul class="list-type-1 toggle-list-container">
                                             {{#each this }}
-                                              <li><a href="/catalog/{{ this.name }}"><i class="fa fa-angle-right"></i>{{ this.name }}</a></li>
+                                              <li><a href="/catalog/{{ this.alias }}"><i class="fa fa-angle-right"></i>{{ this.name }}</a></li>
                                             {{/each }}
                                           </ul>
                                         </div>
@@ -70,7 +70,7 @@
                             <div class="submenu-links-line">
                                 <div class="submenu-links-line-container">
                                     <div class="cell-view">
-                                        <div class="line-links"><b>Полезные ссылки:</b>  <a href="/catalog/angebot">Акции</a>, <a href="/catalog/novelties">Новинки</a>, <a href="/catalog/bestsellers">Топ продаж</a></div>
+                                        <div class="line-links"></div>
                                     </div>
                                 </div>
                             </div>
@@ -85,8 +85,9 @@
                     </li>
               </ul>
               <div class="clear"></div>
-              <a class="fixed-header-visible additional-header-logo"><img src="logo.png" alt="" /></a>
+              <a class="fixed-header-visible additional-header-logo"><img src="logo.png" alt="megakovka.com.ua" /></a>
             </nav>
+
             <div class="navigation-footer responsive-menu-toggle-class">
                 <div class="socials-box">
                     <a href="#"><i class="fa fa-facebook"></i></a>
@@ -98,8 +99,8 @@
                     <a href="#"><i class="fa fa-pinterest-p"></i></a>
                     <div class="clear"></div>
                 </div>
-                <div class="navigation-copyright"> &copy; 2018. Все права защищены. <a>megakovka.com.ua</a> </div>
             </div>
+
           </div>
       </div>
     </header>

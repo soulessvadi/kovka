@@ -57,7 +57,7 @@
             </div>
 
             <div class="right-entries">
-                <a class="header-functionality-entry open-search-popup" href=""><i class="fa fa-search"></i><span>Поиск</span></a>
+                <a class="header-functionality-entry open-search-popup"><i class="fa fa-search"></i><span>Поиск</span></a>
                 <a class="header-functionality-entry" href="/favorites"><i class="fa fa-heart-o"></i><span>Избранное <b><span class="favorites-total">0</span></b></span></a>
                 <a class="header-functionality-entry open-cart-popup" href="/checkout"><i class="fa fa-shopping-cart"></i><span>Корзина</span> <b><span class="cart-total">0.00</span> ₴</b></a>
             </div>
@@ -75,7 +75,7 @@
                 <div class="navigation-search-content">
                     <div class="toggle-desktop-menu"><i class="fa fa-bars"></i><i class="fa fa-search"></i> <span>меню</span> </div>
                     <div class="search-box size-1">
-                        <form id="search-form" onsubmit="__.search(event);">
+                        <form action="/catalog" id="search-form" onsubmit="__.searchSubmit(event);">
                             <div class="search-button">
                                 <i class="fa fa-search"></i>
                                 <input type="submit"/>
@@ -103,7 +103,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                           <ul class="list-type-1 toggle-list-container">
                                             {{#each this }}
-                                              <li><a href="/catalog/{{ this.name }}"><i class="fa fa-angle-right"></i>{{ this.name }}</a></li>
+                                              <li><a href="/catalog/{{ this.alias }}"><i class="fa fa-angle-right"></i>{{ this.name }}</a></li>
                                             {{/each }}
                                           </ul>
                                         </div>

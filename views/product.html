@@ -1,0 +1,129 @@
+<div id="content-block">
+    <div class="content-center fixed-header-margin">
+
+        {{> header2 }}
+
+        <div class="content-push">
+
+          <div class="breadcrumb-box">
+            <a href="/">ГЛАВНАЯ</a>
+            <a href="/catalog">КАТАЛОГ</a>
+            <a href="/catalog/{{ product.cat_alias }}"> {{ product.cat_name }} </a>
+            <a> {{ product.name }} </a>
+          </div>
+
+            <div class="information-blocks">
+                  <div class="row">
+                    <div class="information-blocks">
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 information-entry">
+                        <div class="product-preview-box">
+                          <div class="swiper-container product-preview-swiper swiper-swiper-unique-id-0 initialized" id="swiper-unique-id-0">
+                            <div class="swiper-wrapper">
+                              <div class="swiper-slide">
+                                <div class="product-zoom-image">
+                                  <img src="/img/products/{{ product.cover }}" alt="{{ product.name }}" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-7 information-entry product-page-form">
+                        <div class="product-detail-box">
+                          <h1 class="product-title">{{ product.name }}</h1>
+                          <h3 class="product-subtitle"><a class="product-subtitle " href="/catalog/{{ product.cat_alias }}">{{ product.cat_name }}</a></h3>
+                          <div class="product-description detail-info-entry"> {{ product.sku }} </div>
+                          <div class="price detail-info-entry">
+                            <div class="product-price detail-info-entry" style="font-size:24px;"><span>{{ product.price }}</span> ₴</div>
+                            <div class="quantity-selector detail-info-entry">
+                              <div class="detail-info-entry-title">Количество</div>
+                              <div class="entry number-minus">&nbsp;</div>
+                              <div class="entry number">1</div>
+                              <div class="entry number-plus">&nbsp;</div>
+                              <input type="hidden" class="quantity-value" name="qty" value="1">
+                            </div>
+                            <div class="current total-price"><span>{{ product.price }}</span> ₴</div>
+                          </div>
+                          <div class="detail-info-entry">
+                            <a class="button style-10 to-cart-button" {{#unless product.in_cart }} onclick="__.toCart(event, {{ product.id }}, parseInt($('.quantity-value').val()))" {{/unless}} }}><span>{{#unless product.in_cart }} В корзину {{else}} В корзине {{/unless}}</span></a>
+                            <a class="button style-11 to-favorites-button" {{#unless product.in_favorites }} onclick="__.toFavorites(event, {{ product.id }})" {{/unless}} }}><i class="fa fa-heart"></i><span>{{#unless product.in_favorites }} В избранное {{else}} В избранном {{/unless}}</span></a>
+                            <div class="clear"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="clear"></div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 information-entry pull-right">
+                      <div class="information-blocks">
+                        <div class="sidebar-navigation">
+                          {{#each categories }}
+                          <div class="list col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            {{#each this }}
+                            <a class="entry {{#equals this.alias ../category.alias }} active {{/equals }}" href="/catalog/{{ this.alias }}">
+                              <i class="fa fa-angle-right"></i><span>{{ this.name }}</span>
+                            </a>
+                            {{/each}}
+                          </div>
+                          {{/each}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="information-blocks">
+                    <div class="tabs-container style-1">
+                        <div class="swiper-tabs tabs-switch">
+                            <div class="title">Дополнительная информация</div>
+                            <div class="list">
+                                <a class="tab-switcher active">Оплата и доставка</a>
+                                <a class="tab-switcher">Гарантии и возврат</a>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="tabs-entry" style="display: block; opacity: 1;">
+                                <div class="article-container style-1">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 information-entry">
+                                            <h4>Оплата</h4>
+                                              <p>Оплатить можно на карточку ПриватБанка через отделение , услугу Приват24, платежный терминал ПриватБанка.</p>
+                                              <p>А также можно наложенным платежом ( Ин-тайм, Нова Пошта ).</p>
+                                              <p>Оплата за перевозку товара производится за счет покупателя непосредственно при получении груза на складе транспортной компании.</p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 information-entry">
+                                            <h4>Доставка</h4>
+                                            <p>Доставка осуществляется курьерскими службами такими как: Деливери, Ин-тайм, Автолюкс, Нова Пошта.</p>
+                                            <p>После отправки товара в Ваш город, менеджер предоставляет Вам номер товарно-транспортной накладной (ТТН) с количеством мест и суммой оплаты за доставку.</p>
+                                            <p>Стоимость доставки определяет перевозчик. По номеру ТТН Вы можете отследить перемещение, дату прибытия своего груза на сайте компании-перевозчика.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tabs-entry" style="opacity: 0; display: none;">
+                                <div class="article-container style-1">
+                                    <div class="row">
+                                        <div class="col-md-12 information-entry">
+                                            <h4>Гарантии и возврат</h4>
+                                            <p>Мы даем 14 дней* на обмен/возврат товара надлежащего качества, не считая дня покупки.</p>
+                                            <p><strong>*</strong> При условии, что им товар не использовался и сохранены его товарный вид, потребительские свойства а также чек, выданный вместе с проданным товаром.</p>
+                                            <p>Все другие условия обмена товара, кроме срока обмена, который определяется этим пунктом, регулируются <br><strong>Законом Украины "О защите прав потребителей"</strong>.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {{> featured }}
+
+            {{> footer }}
+        </div>
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+{{> modals }}

@@ -571,7 +571,7 @@ header .icon-entry .text b{font-size: 16px; line-height: 18px; font-weight: 600;
 
 	.responsive-search-button{display: inline-block;}
 	.header-functionality-entry{padding: 0; border-right: none;}
-	.header-functionality-entry span{display: none;}
+	.header-functionality-entry>span{display: none;}
 	.header-functionality-entry .fa{width: 45px; height: 45px; line-height: 45px; font-size: 24px; color: #2f2f2f; text-align: center; margin: 0;}
     .header-functionality-entry.open-search-popup{display: inline-block;}
 	.header-middle{border-bottom: 1px solid #f0f0f0;}

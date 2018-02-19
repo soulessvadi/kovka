@@ -14,6 +14,13 @@ __.ajax = function(req, callback) {
   });
 };
 
+__.tablepagi = function(e, c) {
+  var offset = $('.table-slider').scrollLeft();
+  var width = $('.table-slider .table-slider-slide').outerWidth();
+  console.log(offset, width);
+  $('.table-slider').animate({ scrollLeft: ( c ? offset + width + 3.8 : offset - width - 3.8 ) }, 150);
+};
+
 __.contactMessage = function(e) {
   e.preventDefault();
   $('.contact-form *').removeClass('required');
@@ -59,6 +66,9 @@ __.toFavorites = function(e, pid) {
         $(e.target)
         .parents('.product-slide-entry').find('.to-favorites-button')
         .removeAttr('onclick').find('span').html('В избранном');
+        $(e.target)
+        .parents('.detail-info-entry').find('.to-favorites-button')
+        .removeAttr('onclick').find('span').html('В избранном');
         new Tooltip(res.sku + ' добавлен в избранное', 'success', 'fa fa-heart').show(200, true).hide(500, 2500);
         self.refreshFavorites();
       }
@@ -66,11 +76,12 @@ __.toFavorites = function(e, pid) {
   }
 };
 
-__.toCart = function(e, pid) {
+__.toCart = function(e, pid, qty) {
   var self = this;
+  var qty = typeof qty === typeof undefined ? 1 : qty;
   e.preventDefault();
   if(parseInt(pid)) {
-    this.ajax({ a: 'to_cart', p: pid }, function(err, res) {
+    this.ajax({ a: 'to_cart', p: pid, q: qty }, function(err, res) {
       if(res) {
         $(e.target)
         .parents('.product-slide-entry').find('.to-cart-button')
@@ -295,8 +306,8 @@ __.closeForm = function() {
 };
 
 __.search = function(e, page) {
-  var self = this;
   e.preventDefault();
+  var self = this;
   var req = {
     a: 'search',
     p: isDefined(page) ? page : 1,
@@ -321,6 +332,12 @@ __.search = function(e, page) {
     }
     $('#search-results-products').bootloader('hide');
   });
+};
+
+__.searchSubmit = function(e) {
+  var path = window.location.href.parseURL().path;
+  var action = $(e.target).attr('action');
+  if(path === action) this.search(e);
 };
 
 __.csearch = function(e, page) {
@@ -352,7 +369,13 @@ __.csearch = function(e, page) {
 
 __.initTriggers = function() {
   var self = this;
-  $('.instant-order-form .quantity-value').on('change', function() {
+  $('.product-page-form .quantity-value').on('change', function() {
+    var price = parseFloat($('.product-page-form .product-price span').text());
+    var qty = parseInt($(this).val());
+    var total = (price * qty).toFixed(2);
+    $('.product-page-form .total-price span').html(total);
+  });
+  $('#product-popup-wrapper .quantity-value').on('change', function() {
     var price = parseFloat($('.instant-order-form .product-price span').text());
     var qty = parseInt($(this).val());
     var total = (price * qty).toFixed(2);
@@ -543,6 +566,12 @@ String.prototype.isEmail = function() {
     return regex.test(this);
 };
 
+$.fn.scrollToElement = function(offset) {
+    offset = typeof offset == 'undefined' ? 0 : offset;
+    $('html, body').animate({ scrollTop: ($(this).offset().top - offset) + 'px' }, 300);
+    return this;
+}
+
 if(!$.prototype.hasAttr) {
   $.prototype.hasAttr = function(attr) {
     var attr = $(this).attr(attr);
@@ -601,4 +630,19 @@ if (!Array.prototype.includes) {
   };
 }
 
+String.prototype.parseURL = function() {
+    var parser = document.createElement('a'), queries, split, i;
+    parser.href = this;
+    queries = parser.search.replace(/^\?/, '').split('&');
+    for(i=0;i<queries.length;i++) { split = queries[i].split('='); }
+    return {
+        protocol:   parser.protocol,
+        host:       parser.host,
+        hostname:   parser.hostname,
+        port:       parser.port,
+        path:       parser.pathname.replace(/\/+$/,''),
+        search:     parser.search,
+        hash:       parser.hash
+    };
+};
 /* extends & polyfills */
