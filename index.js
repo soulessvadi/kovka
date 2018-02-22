@@ -1,5 +1,8 @@
 var express = require('express');
 var session = require('express-session');
+var mysqlsession = require('express-mysql-session')(session);
+var db = require('./app/config/mysql');
+var mysqlStore = new mysqlsession({ host: db.host, user: db.user, password: db.pass, database: db.name});
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -9,7 +12,9 @@ var hbs = require('hbs');
 var fs = require('fs');
 var path = require('path');
 var router = require('./app/routes');
+var seeder = require('./app/seeder');
 const App = express();
+const Secret = 'megakovka-23-1-18-x808';
 
 /* templating */
 App.engine('html', hbs.__express);
@@ -30,28 +35,20 @@ hbs.registerHelper('foreach', function(a, b, opts) {
 });
 /* templating */
 
-/*
-var redis = require('redis'),  client = redis.createClient();
-client.set("guest_id", (Math.random() * 100000), redis.print);
-client.get("guest_id", function (err, reply) { console.log(reply.toString()); });
-*/
-
 /* middlewares group */
 App.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 App.use(bodyParser.json());
 App.use(bodyParser.urlencoded({ extended: false }));
 App.use(express.static(path.join(__dirname, 'public')));
-App.use(cookieParser('megakovka-23-1-18-x808'));
+App.use(cookieParser(Secret));
 App.use(session({
-  secret: 'megakovka-23-1-18-x808',
+  secret: Secret,
   name: 'guest',
+  store: mysqlStore,
   resave: true,
   rolling: true,
   saveUninitialized: true,
-  cookie: {
-    secure: false,
-    maxAge: 60000000
-  }
+  cookie: { secure: false, maxAge: 86400000 }
 }));
 App.use(logger('dev'));
 App.use('/', router);

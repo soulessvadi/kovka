@@ -48,6 +48,14 @@ Provider.prototype.getAllProducts = function(session_id, callback) {
     });
 };
 
+Provider.prototype.getFullProducts = function(session_id, callback) {
+    DB.execute("SELECT P.*, ROUND(P.price, 2) as price, C.name as cat_name, C.alias as cat_alias, C.id as cat_id " +
+      "FROM products as P LEFT JOIN categories as C on C.id = P.cat_id ORDER BY C.id DESC, P.name ASC LIMIT 10000", function(err, res) {
+        if(res) callback(null, res);
+        else callback(err, null);
+    });
+};
+
 Provider.prototype.getFeaturedProducts = function(session_id, callback) {
   Async.parallel({
     stock: function (cb) {
@@ -437,7 +445,7 @@ Provider.prototype.search = function(params, callback) {
       onpage = limits.hasOwnProperty(params.ppp) ? parseInt(limits[params.ppp]) : parseInt(limits[8]),
       page = parseInt(params.p),
       limit = page * onpage - onpage + ', ' + onpage,
-      keyword = params.q.trim(),
+      keyword = params.q.trim().replace(/'/g, ''),
       dir = params.d == 1 ? 'ASC' : 'DESC',
       query = keyword === '*'
       ? "SELECT P.*, (SELECT name FROM categories WHERE id = P.cat_id LIMIT 1) as cat_name, " +
@@ -504,7 +512,7 @@ Provider.prototype.getPagination = function(page, per_page, pages_count, pages_d
 
 Provider.prototype.getProductsHtml = function(products) {
   var result = '';
-  if(products) {
+  if(products && products.length) {
     for(var x in products) {
       result += '<div class="col-md-3 col-sm-4 col-xs-6 shop-grid-item">'+
           '<div class="product-slide-entry shift-image">'+

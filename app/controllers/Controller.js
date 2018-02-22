@@ -10,6 +10,7 @@ const Provider = new provider();
 exports.sid = 0;
 exports.initialize = function(req, res, next) {
   this.sid = req.session.id;
+  console.log(this.sid);
   next();
 };
 /* INIT */
@@ -18,7 +19,12 @@ exports.initialize = function(req, res, next) {
 exports.home = function(req, res, next) {
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -47,6 +53,7 @@ exports.home = function(req, res, next) {
      res.render('home', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        banners: result.banners,
        categories: result.categories,
        featured: result.featured,
@@ -60,7 +67,12 @@ exports.catalog = function(req, res, next) {
   var query = req.query.q ? req.query.q : '';
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -84,6 +96,7 @@ exports.catalog = function(req, res, next) {
      res.render('catalog', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        featured: result.featured,
        categories: result.categories,
        mcategories: polyfills.chunk(result.categories.slice(0, 24), 8),
@@ -96,7 +109,12 @@ exports.category = function(req, res, next) {
   var cat = req.params.category;
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -135,6 +153,7 @@ exports.category = function(req, res, next) {
      res.render('category', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        featured: result.featured,
        categories: result.categories,
        mcategories: polyfills.chunk(result.categories.slice(0, 24), 8),
@@ -149,7 +168,12 @@ exports.product = function(req, res, next) {
   var sku = req.params.product;
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -183,6 +207,7 @@ exports.product = function(req, res, next) {
      res.render('product', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        product: result.product,
        featured: result.featured,
        favorites: result.favorites,
@@ -195,7 +220,12 @@ exports.product = function(req, res, next) {
 exports.favorites = function(req, res, next) {
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -224,6 +254,7 @@ exports.favorites = function(req, res, next) {
      res.render('favorites', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        featured: result.featured,
        favorites: result.favorites,
        categories: result.categories,
@@ -235,7 +266,12 @@ exports.favorites = function(req, res, next) {
 exports.contacts = function(req, res, next) {
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -259,6 +295,7 @@ exports.contacts = function(req, res, next) {
      res.render('contacts', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        featured: result.featured,
        categories: result.categories,
        mcategories: polyfills.chunk(result.categories.slice(0, 24), 8)
@@ -269,7 +306,12 @@ exports.contacts = function(req, res, next) {
 exports.about = function(req, res, next) {
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -293,6 +335,47 @@ exports.about = function(req, res, next) {
      res.render('about', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
+       featured: result.featured,
+       categories: result.categories,
+       mcategories: polyfills.chunk(result.categories.slice(0, 24), 8)
+     });
+  });
+};
+
+exports.terms = function(req, res, next) {
+  Async.parallel({
+    menu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    categories: function (callback) {
+      DB.execute("SELECT C.*, (SELECT COUNT(id) FROM products WHERE cat_id = C.id) as products FROM categories as C WHERE C.publish = 1 ORDER BY C.name", function(err, res) {
+        callback(err, res);
+      });
+    },
+    featured: function (callback) {
+      Provider.getFeaturedProducts(this.sid, function(err, res) {
+        callback(err, res);
+      });
+    },
+    seo: function (callback) {
+      Provider.getPageSeo(4, function(err, res) {
+        callback(err, res);
+      });
+    }
+  }, function(err, result) {
+     if(err) console.log('ERROR OCCURED', err);
+     res.render('terms', {
+       seo: result.seo,
+       menu: result.menu,
+       fmenu: result.fmenu,
        featured: result.featured,
        categories: result.categories,
        mcategories: polyfills.chunk(result.categories.slice(0, 24), 8)
@@ -303,7 +386,12 @@ exports.about = function(req, res, next) {
 exports.delivery = function(req, res, next) {
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -327,6 +415,7 @@ exports.delivery = function(req, res, next) {
      res.render('delivery', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        featured: result.featured,
        categories: result.categories,
        mcategories: polyfills.chunk(result.categories.slice(0, 24), 8)
@@ -337,7 +426,12 @@ exports.delivery = function(req, res, next) {
 exports.pricelist = function(req, res, next) {
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -366,6 +460,7 @@ exports.pricelist = function(req, res, next) {
      res.render('pricelist', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        products: result.products,
        featured: result.featured,
        categories: result.categories,
@@ -417,10 +512,56 @@ exports.pricelistxls = function(req, res, next) {
   });
 };
 
+exports.pricelistfull = function(req, res, next) {
+  Provider.getFullProducts(this.sid, function(e, r) {
+    if(r) {
+      var Excel = require('exceljs');
+      var bookname = 'megakovka-com-ua-' + moment().format("DD-MM-YYYY-hh-mm-ss") + '.xlsx';
+      var workbook = new Excel.Workbook();
+      var worksheet = workbook.addWorksheet('Текущая номенклатура');
+      workbook.creator = 'megakovka.com.ua';
+      workbook.created = new Date();
+      workbook.modified = new Date();
+      worksheet.properties.outlineLevelCol = 2;
+      worksheet.properties.defaultRowHeight = 20;
+      worksheet.columns = [
+        { width: 10, style: { alignment : { vertical: 'center', horizontal: 'left' } } },
+        { width: 60, style: { alignment : { vertical: 'center', horizontal: 'left' } } },
+        { width: 60, style: { alignment : { vertical: 'center', horizontal: 'left' } } },
+        { width: 15, style: { alignment : { vertical: 'center', horizontal: 'left' } } },
+        { width: 20, style: { alignment : { vertical: 'center', horizontal: 'center' } } }
+      ];
+      worksheet.addRow(['№','Группа','Товар','Код товара','Стоимость, ₴']);
+      worksheet.getCell('A1').font = { name: 'Arial', bold: true, size: 11 };
+      worksheet.getCell('B1').font = { name: 'Arial', bold: true, size: 11 };
+      worksheet.getCell('C1').font = { name: 'Arial', bold: true, size: 11 };
+      worksheet.getCell('D1').font = { name: 'Arial', bold: true, size: 11 };
+      worksheet.getCell('E1').font = { name: 'Arial', bold: true, size: 11 };
+      worksheet.getCell('F1').font = { name: 'Arial', bold: true, size: 11 };
+      r.forEach(function(v, i) {
+        worksheet.addRow([ ( i + 1 ), v.cat_id + ' - ' + v.cat_name, v.name, v.sku, v.price ]);
+      });
+      var tmpfilepath = tempy.file({ name: bookname });
+      workbook.xlsx.writeFile(tmpfilepath).then(function() {
+          res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+          res.setHeader("Content-Disposition", "attachment; filename=" + bookname);
+          res.sendFile(tmpfilepath);
+      })
+    } else {
+      res.end();
+    }
+  });
+};
+
 exports.notFound = function(req, res, next) {
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -444,6 +585,7 @@ exports.notFound = function(req, res, next) {
      res.render('404', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        featured: result.featured,
        categories: result.categories,
        mcategories: polyfills.chunk(result.categories.slice(0, 24), 8)
@@ -454,7 +596,12 @@ exports.notFound = function(req, res, next) {
 exports.checkout = function(req, res, next) {
   Async.parallel({
     menu: function (callback) {
-      DB.execute("SELECT * FROM menu WHERE publish = 1 ORDER BY `order`", function(err, res) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_header = 1 ORDER BY `order`", function(err, res) {
+        callback(err, res);
+      });
+    },
+    fmenu: function (callback) {
+      DB.execute("SELECT * FROM menu WHERE publish = 1 AND in_footer = 1 ORDER BY `order`", function(err, res) {
         callback(err, res);
       });
     },
@@ -483,6 +630,7 @@ exports.checkout = function(req, res, next) {
      res.render('checkout', {
        seo: result.seo,
        menu: result.menu,
+       fmenu: result.fmenu,
        featured: result.featured,
        products: result.products,
        categories: result.categories,
