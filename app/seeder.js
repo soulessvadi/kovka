@@ -1,6 +1,27 @@
 const MySQL = require('./models/MySQL');
+const fs = require('fs');
+const path = require('path');
 
-
+// var Excel = require('exceljs');
+// var workbook = new Excel.Workbook();
+// MySQL.origin.query("TRUNCATE TABLE products", function(err, res) {
+// 	console.log(err, res);
+// });
+// workbook.xlsx.readFile('./app/p.xlsx').then(function() {
+//   var worksheet = workbook.getWorksheet(1);
+//   worksheet.eachRow({ includeEmpty: false }, function(row, key) {
+// 		if(key > 1) {
+// 			var cat_id = parseInt(row.values[2]),
+// 			    name = row.values[3],
+// 				  sku = row.values[4],
+// 					price = parseFloat(row.values[5]).toFixed(2),
+// 					alias = transliterate(name).replace(/\s/g, "-");
+//       MySQL.origin.query("INSERT INTO products SET ?", { 'cat_id':cat_id, 'name':name, 'alias':alias, 'price':price, 'sku':sku }, function(err, res) {
+//         console.log(err, res);
+//       });
+// 		}
+//   });
+// });
 
 // fs.readdir('./public/img/products', function (err, list) {
 //     next(list.length - 1);
@@ -15,37 +36,7 @@ const MySQL = require('./models/MySQL');
 //       });
 //     }
 // });
-//
-// var Excel = require('exceljs');
-// var workbook = new Excel.Workbook();
-// workbook.xlsx.readFile('../public/prices.xlsx').then(function() {
-//   var worksheet = workbook.getWorksheet(1);
-//   worksheet.eachRow({ includeEmpty: false }, function(row, key) {
-//     var id = row.values[1],
-//         name = row.values[2],
-//         cat = typeof row.values[4] == typeof undefined ? 0 : parseInt(row.values[4]),
-//         price = parseFloat(row.values[6].result),
-//         sku, alias;
-//   			name = name.split(" ");
-//
-// 			if(is_numeric(name[0][0])) {
-// 				sku = name[0];
-//         name.splice(0, 1);
-// 			} else {
-// 				sku = name[0] + ' ' + name[1];
-//         name.splice(0, 1);
-//         name.splice(1, 1);
-// 			}
-//
-// 			name = name.join(" ");
-// 			alias = transliterate(name);
-//       alias = alias.replace(/\s/g, "-");
-//       MySQL.origin.query("INSERT INTO products SET ?", {'cat_id':cat, 'name':name, 'alias':alias, 'price':price, 'sku':sku}, function(err, res) {
-//         console.log(err, res);
-//       });
-//   });
-// });
-//
+
 function is_numeric( mixed_var ) {
 	return !isNaN( mixed_var );
 }

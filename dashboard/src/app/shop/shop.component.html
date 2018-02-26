@@ -1,0 +1,66 @@
+<div class="col-xs-12">
+
+  <nav>
+    <ul class="pagination pagination-md justify-content-center" style="margin:10px 0;">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Предыдущая">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Предыдущая</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Следующая">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Следующая</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <table class="table table-striped" *ngIf="products">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Код</th>
+        <th scope="col">Наименование</th>
+        <th scope="col">Группа</th>
+        <th scope="col">Стоимость, ₴</th>
+        <th scope="col">Ранг</th>
+        <th style="width:6%;" scope="col">Новинка</th>
+        <th style="width:6%;" scope="col">Бестселлер</th>
+        <th style="width:6%;" scope="col">Акционный</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <th scope="row">{{ product.id }}</th>
+        <td>{{ product.sku }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.cat_name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.rank }}</td>
+        <td>
+          <label class="switch">
+            <input type="checkbox" [checked]="product.is_new">
+            <span class="slider"></span>
+          </label>
+        </td>
+        <td>
+          <label class="switch">
+            <input type="checkbox" [checked]="product.is_bestseller">
+            <span class="slider"></span>
+          </label>
+        </td>
+        <td>
+          <label class="switch">
+            <input type="checkbox" [checked]="product.is_stock">
+            <span class="slider"></span>
+          </label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

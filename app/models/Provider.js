@@ -50,7 +50,7 @@ Provider.prototype.getAllProducts = function(session_id, callback) {
 
 Provider.prototype.getFullProducts = function(session_id, callback) {
     DB.execute("SELECT P.*, ROUND(P.price, 2) as price, C.name as cat_name, C.alias as cat_alias, C.id as cat_id " +
-      "FROM products as P LEFT JOIN categories as C on C.id = P.cat_id ORDER BY C.id DESC, P.name ASC LIMIT 10000", function(err, res) {
+      "FROM products as P LEFT JOIN categories as C on C.id = P.cat_id ORDER BY P.sku LIMIT 10000", function(err, res) {
         if(res) callback(null, res);
         else callback(err, null);
     });

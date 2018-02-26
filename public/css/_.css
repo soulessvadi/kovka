@@ -1,3 +1,5 @@
+.navigation-banner-content .description {font-size: 20px; color:#fff; background: rgba(22, 21, 33, 0.4); padding: 10px 15px;}
+.navigation-banner-content .title {background: rgba(22, 21, 33, 0.4); padding: 15px 20px;}
 .page-catalog .portfolio-entry .image{text-align: center;}
 .page-catalog .portfolio-entry .image .title-info .title {line-height: 24px;}
 .page-catalog .portfolio-entry .action-button{min-width: 35%;}

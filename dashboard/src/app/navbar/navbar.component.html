@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#" routerLink="">@savage</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse">
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" routerLink="" routerLinkActiveOptions="{exact:true}">ПАНЕЛЬ</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" routerLink="orders">ЗАКАЗЫ</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          МАГАЗИН
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" routerLink="shop" routerLinkActive="active">УПРАВЛЕНИЕ КАТАЛОГОМ</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" routerLink="import" routerLinkActive="active">ИМПОРТ/ЭКСПОРТ</a>
+        </div>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" routerLink="auth">Вход</a>
+      </li>
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="ключевое слово" aria-label="поиск">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">НАЙТИ</button>
+    </form>
+
+  </div>
+</nav>
