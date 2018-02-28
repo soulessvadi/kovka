@@ -1,15 +1,20 @@
-import { NgModule }             from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShopComponent } from './shop/shop.component';
 import { ImportComponent } from './import/import.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AuthComponent } from './auth/auth.component';
+import { ProductComponent } from './shop/product.component';
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
     component: DashboardComponent
   },
   {
@@ -17,8 +22,16 @@ const routes: Routes = [
     component: AuthComponent
   },
   {
-    path: 'shop',
+    path: 'shop/:page',
     component: ShopComponent
+  },
+	{
+  	path: 'shop/entity/:id',
+  	component: ProductComponent
+	},
+  {
+    path: 'shop',
+    redirectTo: '/shop/1',
   },
   {
     path: 'import',
@@ -28,6 +41,10 @@ const routes: Routes = [
     path: 'orders',
     component: OrdersComponent
   },
+  {
+    path: '**',
+    component: OrdersComponent
+  }
 ];
 
 @NgModule({

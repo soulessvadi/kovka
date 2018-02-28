@@ -13,8 +13,10 @@ var fs = require('fs');
 var path = require('path');
 var router = require('./app/routes');
 var seeder = require('./app/seeder');
+var dashboard = require('./dashboard');
 const App = express();
 const Secret = 'megakovka-23-1-18-x808';
+const port = process.env.PORT || '3000';
 
 /* templating */
 App.engine('html', hbs.__express);
@@ -51,6 +53,7 @@ App.use(session({
   cookie: { secure: false, maxAge: 86400000 }
 }));
 App.use(logger('dev'));
+App.use(dashboard(App));
 App.use('/', router);
 /* middlewares group */
 
@@ -72,4 +75,4 @@ App.use(function(err, req, res, next) {
 /* catching error occurence */
 
 /* App starts  */
-App.listen(3000);
+App.listen(port, () => console.log(`Running on localhost:${port}`));

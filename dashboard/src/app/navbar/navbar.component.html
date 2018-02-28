@@ -8,13 +8,19 @@
   <div class="collapse navbar-collapse">
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" routerLink="" routerLinkActiveOptions="{exact:true}">ПАНЕЛЬ</a>
+      <li class="nav-item" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+        <a class="nav-link" href="#" routerLink="dashboard">ПАНЕЛЬ</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
         <a class="nav-link" href="#" routerLink="orders">ЗАКАЗЫ</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+        <a class="nav-link" href="#" routerLink="shop">УПРАВЛЕНИЕ КАТАЛОГОМ</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
+        <a class="nav-link" href="#" routerLink="import">ИМПОРТ/ЭКСПОРТ</a>
+      </li>
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           МАГАЗИН
         </a>
@@ -23,16 +29,12 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" routerLink="import" routerLinkActive="active">ИМПОРТ/ЭКСПОРТ</a>
         </div>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" routerLink="auth">Вход</a>
-      </li>
+      </li> -->
     </ul>
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="ключевое слово" aria-label="поиск">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">НАЙТИ</button>
-    </form>
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Код товара" aria-label="поиск" (keyup)="searchtyping($event)">
+    </form> -->
 
   </div>
 </nav>

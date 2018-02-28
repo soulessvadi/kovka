@@ -1,7 +1,12 @@
 @import url('https://bootswatch.com/4/yeti/bootstrap.min.css') screen;
-
+table span.c { color: green; }
+table span.u { color: orange; }
+table span.d { color: red; }
 table tbody tr td{vertical-align: middle!important;}
-
+.pagination .page-link {min-width: 35px;text-align: center;}
+body{overflow-x: hidden;overflow-y: scroll;min-height: 100vh;}
+.table-tr-hover{transition: all .2s;cursor: pointer;}
+.table-tr-hover:hover{box-shadow: inset 1px 0 4px 0px #585858;}
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -37,6 +42,10 @@ table tbody tr td{vertical-align: middle!important;}
   background-color: white;
   -webkit-transition: .24s;
   transition: .24s;
+}
+
+.switch.green input:checked + .slider {
+  background-color: #00b15d;
 }
 
 input:checked + .slider {

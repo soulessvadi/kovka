@@ -7,6 +7,7 @@ import { AppRoutingModule }     from './routes.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShopComponent } from './shop/shop.component';
+import { ProductComponent } from './shop/product.component';
 import { OrdersComponent } from './orders/orders.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ImportComponent } from './import/import.component';
@@ -21,13 +22,14 @@ import { AuthComponent } from './auth/auth.component';
     OrdersComponent,
     DashboardComponent,
     ImportComponent,
-    AuthComponent
+    AuthComponent,
+    ProductComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
   ],
   providers: [
     ProductsService

@@ -1,0 +1,14 @@
+<div *ngIf="product" class="chat-wrapper">
+	<div class="chat-window">
+		<h2 style="text-align: center;">Message edit mode.</h2>
+		<div class="line"><label>Author name: </label><input type="text" [(ngModel)]="product.name"></div>
+		<div class="line"><label>Author age: </label><input type="text" [(ngModel)]="product.alias"></div>
+		<div class="line"><label>Author image: </label><img src="{{product.cover}}" alt="{{product.name}}"></div>
+		<div class="line"><label>ID: </label>{{product.id}}</div>
+		<div class="chat-footer" style="padding: 0;">
+			<label>Text: </label>
+			<textarea [(ngModel)]="product.description" placeholder="message" style="width:100%; float: none;"></textarea>
+			<button (click)="goBack()" style="width: auto; float: none; margin: 5px auto; padding: 10px 20px; height: auto;">Get back</button>
+		</div>
+	</div>
+</div>
