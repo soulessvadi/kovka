@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShopComponent } from './shop/shop.component';
 import { ImportComponent } from './import/import.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrderComponent } from './orders/order.component';
 import { AuthComponent } from './auth/auth.component';
 import { ProductComponent } from './shop/product.component';
 
@@ -38,8 +39,16 @@ const routes: Routes = [
     component: ImportComponent
   },
   {
-    path: 'orders',
+    path: 'orders/:page',
     component: OrdersComponent
+  },
+  {
+    path: 'orders/entity/:id',
+    component: OrderComponent
+  },
+  {
+    path: 'orders',
+    redirectTo: '/orders/1',
   },
   {
     path: '**',

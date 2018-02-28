@@ -9,10 +9,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ShopComponent } from './shop/shop.component';
 import { ProductComponent } from './shop/product.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrderComponent } from './orders/order.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ImportComponent } from './import/import.component';
-import { ProductsService } from './shop/products.service';
 import { AuthComponent } from './auth/auth.component';
+import { ProductsService } from './shop/products.service';
+import { ShopService } from './services/shop.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { AuthComponent } from './auth/auth.component';
     NavbarComponent,
     ShopComponent,
     OrdersComponent,
+    OrderComponent,
     DashboardComponent,
     ImportComponent,
     AuthComponent,
@@ -32,7 +35,8 @@ import { AuthComponent } from './auth/auth.component';
     HttpModule,
   ],
   providers: [
-    ProductsService
+    ProductsService,
+    ShopService
   ],
   bootstrap: [
     AppComponent

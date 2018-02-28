@@ -1,0 +1,17 @@
+<div *ngIf="order">
+
+  <h2>Заказ #{{ order.number }}</h2>
+  <div><span>id: </span>{{ order.number }}</div>
+  <div>
+    <label>
+      <input [(ngModel)]="order.name" placeholder="name"/>
+    </label>
+    <label>
+      <input [(ngModel)]="order.phone" placeholder="phone"/>
+    </label>
+    <label>
+      <input [(ngModel)]="order.email" placeholder="email"/>
+    </label>
+  </div>
+
+</div>

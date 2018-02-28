@@ -18,9 +18,63 @@ let response = {};
 
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:4200");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-CSRF");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-CSRF, X-XSRF-TOKEN");
   res.header('Access-Control-Allow-Methods', 'POST, GET');
   next();
+});
+
+router.get('/getOrders', (req, res) => {
+    response = {};
+    response.orders = [];
+    var self = this,
+        onpage = 15,
+        page = parseInt(req.query.p) || 1,
+        limit = page * onpage - onpage + ', ' + onpage,
+        keyword = req.query.q.trim().length ? req.query.q.trim() : '*',
+        assumed_id = !isNaN(parseInt(keyword)) ? parseInt(keyword) : 0;
+        query = keyword === '*'
+        ? "SELECT O.*, (O.id + 20000) as number, " +
+          "(SELECT SUM(quantity * (SELECT price FROM products WHERE id = OP.prod_id)) FROM orders_products as OP WHERE order_id = O.id) as amount, "+
+          "(SELECT SUM(quantity) FROM orders_products as OP WHERE order_id = O.id) as count "+
+          "FROM orders as O ORDER BY O.created DESC LIMIT "+limit+""
+        : "SELECT O.*, (O.id + 20000) as number, " +
+          "(SELECT SUM(quantity * (SELECT price FROM products WHERE id = OP.prod_id)) FROM orders_products as OP WHERE order_id = O.id) as amount, "+
+          "(SELECT SUM(quantity) FROM orders_products as OP WHERE order_id = O.id) as count "+
+          "FROM orders as O "+
+          "WHERE (O.id + 20000) LIKE '"+assumed_id+"%' OR O.name LIKE '%"+keyword+"%' ORDER BY O.created DESC LIMIT "+limit+"";
+        cquery = keyword === '*'
+        ? "SELECT COUNT(O.id) as count FROM orders as O LIMIT 1"
+        : "SELECT COUNT(O.id) as count FROM orders as O WHERE (O.id + 20000) LIKE '"+assumed_id+"%' OR O.name LIKE '%"+keyword+"%' LIMIT 1";
+    DB.execute(query, function(err, orders) {
+      DB.execute(cquery, function(err, row) {
+        if(res) {
+          var total = row[0].count,
+          pages = Math.ceil(total/onpage);
+          paginator = Provider.getPagination(page, onpage, pages, 3);
+          response.status = 'ok';
+          response.orders = orders;
+          response.total = total;
+          response.page_current = paginator.current;
+          response.pagi = paginator.pages;
+          response.page_prev = paginator.prev;
+          response.page_next = paginator.next;
+          response.onpage = ( total ? onpage : 0 );
+          res.json(response);
+        }
+      });
+    });
+});
+
+router.post('/updateOrder', (req, res) => {
+    response = {};
+    var id = parseInt(req.body.id);
+    var status = parseInt(+req.body.status);
+    var query = `UPDATE orders SET status = ` + status + ` WHERE id = ` + id + ``;
+    DB.execute(query, function(e, r) {
+      if(e) response.status = e;
+      else response.status = 'ok';
+      res.json(response);
+    });
 });
 
 router.post('/updateProduct', (req, res) => {
@@ -50,11 +104,11 @@ router.post('/updateProduct', (req, res) => {
       name = '` + name + `',
       sku = '` + sku + `'
     WHERE id = ` + id + ``;
-    DB.execute(query, function(err, res) {
-      if(err) response.status = err;
+    DB.execute(query, function(e, r) {
+      if(e) response.status = e;
       else response.status = 'ok';
+      res.json(response);
     });
-    res.json(response);
 });
 
 router.get('/getProducts', (req, res) => {
@@ -187,16 +241,12 @@ router.post('/uploadPricelist', upload.single('files'), (req, res) => {
             rows.forEach((val) => {
               if(products.includes(val.sku)) {
                 history.push({
-                  cat_id: val.cat_id,
-                  name: val.name,
-                  sku: val.sku,
-                  price: val.price,
-                  alias: val.alias,
-                  ops: 3
+                  cat_id: val.cat_id, name: val.name, sku: val.sku,
+                  price: val.price, alias: val.alias, ops: 3
                 });
               }
             });
-            DB.origin.query("delete from products where sku in (?)", [products], (err, res) => {
+            DB.origin.query("update products set publish = 0 where sku in (?)", [products], (err, res) => {
               if(err) console.trace(err);
             });
           }

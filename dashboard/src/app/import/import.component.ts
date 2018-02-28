@@ -46,8 +46,10 @@ export class ImportComponent implements OnInit {
     formData.append("files", files[0], files[0]['name']);
     this._service.uploadPricelist(formData)
       .then((res) => {
-        console.log(res);
-        this.products = res.products as Product[]
+        if(res.status == 'ok') {
+          this.products = res.products as Product[]
+          this.filename = event.target.value = null;
+        }
       });
   }
 
