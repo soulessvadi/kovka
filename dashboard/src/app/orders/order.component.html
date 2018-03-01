@@ -41,13 +41,13 @@
               <div class="card mt-4">
                 <div class="card-header bg-dark text-light">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <h5 class="float-left">Содержимое</h5>
-                    <form class="form-inline float-right">
+                    <h5 class="float-left mb-1 mt-1">Содержимое</h5>
+                    <div class="form-inline float-right">
                       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                        <input type="text" placeholder="код товара" value="" class="form-control">
+                        <input type="text" placeholder="код товара" value="" class="form-control" [(ngModel)]="add_sku">
                       </div>
-                      <button class="btn btn-outline-info">Добавить</button>
-                    </form>
+                      <button class="btn btn-outline-info" (click)="add()">Добавить</button>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="card-body">
@@ -64,13 +64,13 @@
                       </div>
                       <div class="col-xs-6 col-md-4 row">
                         <div class="col-xs-4 col-md-4 text-right">
-                          <h5 class="mb-1 mt-1"><strong>{{ op.price | number }} <span class="text-muted">X</span></strong></h5>
+                          <h5 class="mb-1 mt-1"><strong>{{ op.price | number: '.2' }} <span class="text-muted">X</span></strong></h5>
                         </div>
                         <div class="col-xs-4 col-md-4">
-                          <input type="number" class="form-control input-sm" value="{{ op.quantity }}">
+                          <input type="number" class="form-control input-sm" min="1" value="{{ op.quantity }}" [(ngModel)]="op.quantity" (change)="countTotals()">
                         </div>
                         <div class="col-xs-4 col-md-4">
-                          <button type="button" class="btn btn-outline-info btn-xs">Удалить</button>
+                          <button type="button" class="btn btn-outline-info btn-xs" (click)="remove(op)">Удалить</button>
                         </div>
                       </div>
                     </div>
@@ -80,19 +80,20 @@
                 </div>
                 <div class="card-footer">
                     <div class="col-6">
-                      <h5 class="float-left mb-2 mt-2 mr-2">ОБРАБОТАН:</h5>
+                      <h5 class="float-left mb-2 mt-2 mr-2">ПОДТВЕРЖДЕНИЕ:</h5>
                       <label class="switch float-left mb-2 mt-2 ">
-                        <input type="checkbox" [(ngModel)]="order.status" [checked]="order.status" (change)="updateOrder(order)">
+                        <input type="checkbox" [(ngModel)]="order.status" [checked]="order.status">
                         <span class="slider"></span>
                       </label>
                     </div>
-                    <div class="float-right"><h3>К оплате: <b> {{ order.amount }} ₴</b></h3> </div>
+                    <div class="float-right"><h3>К оплате: <b> {{ order.amount | number: '2.2' }} ₴</b></h3> </div>
                 </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Сохранить</button>
+          <h5 class="float-left mb-2 mt-2 mr-2">{{ response_message }}</h5>
+          <button type="button" class="btn btn-primary" (click)="saveOrder()">Сохранить</button>
         </div>
       </div>
     </div>

@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule }     from './routes.module';
 
 import { AppComponent } from './app.component';
+import { SiteMenuComponent } from './site/menu.component';
+import { SiteSliderComponent } from './site/slider.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShopComponent } from './shop/shop.component';
 import { ProductComponent } from './shop/product.component';
@@ -26,7 +28,9 @@ import { ShopService } from './services/shop.service';
     DashboardComponent,
     ImportComponent,
     AuthComponent,
-    ProductComponent
+    ProductComponent,
+    SiteMenuComponent,
+    SiteSliderComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,4 +1,6 @@
 const express = require('express');
+const path = require('path');
+const Async = require('async');
 const router = express.Router();
 const fs = require('fs');
 const DB = require('./db');
@@ -9,7 +11,24 @@ const Provider = require('./provider');
 var upload = multer({
   storage: multer.diskStorage({
     destination: __dirname,
-    filename: ( req, file, cb ) => cb( null, 'p.xlsx' )
+    filename: function(req, file, cb) {
+      var ext = (/[.]/.exec(file.originalname)) 
+        ? /[^.]+$/.exec(file.originalname)[0] 
+          : 'noext';
+      cb(null, Date.now() + '.' + ext);
+    }
+  })
+});
+
+var images = multer({
+  storage: multer.diskStorage({
+    destination: path.join(__dirname, '..', '..', 'public', 'img'),
+    filename: function(req, file, cb) {
+      var ext = (/[.]/.exec(file.originalname)) 
+        ? /[^.]+$/.exec(file.originalname)[0] 
+          : 'noext';
+      cb(null, 'img_' + Date.now() + '.' + ext);
+    }
   })
 });
 
@@ -21,6 +40,141 @@ router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-CSRF, X-XSRF-TOKEN");
   res.header('Access-Control-Allow-Methods', 'POST, GET');
   next();
+});
+
+router.post('/saveSlideChanged', images.single('files'), (req, res) => {
+  response = {};
+  var entity = {};
+  var slide = JSON.parse(req.body.slide);  
+  var filename = req.file.filename;
+  var path = req.file.path;
+  if(path) entity.cover = filename, response.filename = filename;
+  entity.name = slide.name;
+  entity.order = parseInt(+slide.order);
+  entity.publish = parseInt(+slide.publish);
+  entity.title = slide.title;
+  entity.subtitle = slide.subtitle;
+  entity.description = slide.description;
+  DB.origin.query("update banners set ? where id = ?", [entity, slide.id], function(e, r) {
+    if(e) response.status = e;
+    else response.status = 'ok';
+    res.json(response);
+  });
+
+});
+
+router.get('/getSlides', (req, res) => {
+    response = {};
+    response.slides = [];
+    var self = this,
+        onpage = 15,
+        page = parseInt(req.query.p) || 1,
+        limit = page * onpage - onpage + ', ' + onpage;
+        query = "select * from banners LIMIT "+limit+"";
+        cquery = "select count(id) as count from banners limit 1";
+    DB.execute(query, function(err, slides) {
+      DB.execute(cquery, function(err, row) {
+        if(res) {
+          var total = row[0].count,
+          pages = Math.ceil(total/onpage);
+          paginator = Provider.getPagination(page, onpage, pages, 3);
+          response.status = 'ok';
+          response.slides = slides;
+          response.total = total;
+          response.page_current = paginator.current;
+          response.pagi = paginator.pages;
+          response.page_prev = paginator.prev;
+          response.page_next = paginator.next;
+          response.onpage = ( total ? onpage : 0 );
+          res.json(response);
+        }
+      });
+    });
+});
+
+router.post('/updateSlide', (req, res) => {
+    response = {};
+    var entity = {};
+    var slide = req.body;
+    entity.name = slide.name;
+    entity.order = parseInt(+slide.order);
+    entity.publish = parseInt(+slide.publish);
+    entity.title = slide.title;
+    entity.subtitle = slide.subtitle;
+    entity.description = slide.description;
+    DB.origin.query("update banners set ? where id = ?", [entity, slide.id], function(e, r) {
+      if(e) response.status = e;
+      else response.status = 'ok';
+      res.json(response);
+    });
+});
+
+router.post('/updateMenu', (req, res) => {
+    response = {};
+    var entity = {};
+    var menu = req.body;
+    entity.name = menu.name;
+    entity.seo_title = menu.seo_title;
+    entity.seo_keys = menu.seo_keys;
+    entity.seo_desc = menu.seo_desc;
+    entity.order = parseInt(+menu.order);
+    entity.publish = parseInt(+menu.publish);
+    entity.in_header = parseInt(+menu.in_header);
+    entity.in_footer = parseInt(+menu.in_footer);
+    entity.catalog = parseInt(+menu.catalog);
+    DB.origin.query("update menu set ? where id = ?", [entity, menu.id], function(e, r) {
+      if(e) response.status = e;
+      else response.status = 'ok';
+      res.json(response);
+    });
+});
+
+router.get('/getMenus', (req, res) => {
+    response = {};
+    response.menus = [];
+    var self = this,
+        onpage = 15,
+        page = parseInt(req.query.p) || 1,
+        limit = page * onpage - onpage + ', ' + onpage;
+        query = "select * from menu LIMIT "+limit+"";
+        cquery = "select count(id) as count from menu limit 1";
+    DB.execute(query, function(err, menus) {
+      DB.execute(cquery, function(err, row) {
+        if(res) {
+          var total = row[0].count,
+          pages = Math.ceil(total/onpage);
+          paginator = Provider.getPagination(page, onpage, pages, 3);
+          response.status = 'ok';
+          response.menus = menus;
+          response.total = total;
+          response.page_current = paginator.current;
+          response.pagi = paginator.pages;
+          response.page_prev = paginator.prev;
+          response.page_next = paginator.next;
+          response.onpage = ( total ? onpage : 0 );
+          res.json(response);
+        }
+      });
+    });
+});
+
+router.get('/getOrderProduct', (req, res) => {
+    response = {};
+    response.product = {};
+    var self = this,
+        sku = req.query.s.trim(),
+        query = "SELECT P.*, 1 as quantity, (SELECT name FROM categories WHERE id = P.cat_id LIMIT 1) as cat_name " +
+          "FROM products as P " +
+          "WHERE sku Like '" + sku + "%' LIMIT 1";
+    DB.execute(query, function(err, row) {
+      if(row) {
+        response.product = row.pop();
+        response.status = 'ok';
+      } else {
+        response.status = err;
+      }
+      res.json(response);
+    });
 });
 
 router.get('/getOrder', (req, res) => {
@@ -102,6 +256,39 @@ router.post('/updateOrder', (req, res) => {
       else response.status = 'ok';
       res.json(response);
     });
+});
+
+router.post('/saveOrderChanged', (req, res) => {
+    response = {};
+    var order = req.body;
+    var status = parseInt(+order.status);
+    var id = parseInt(+order.id);
+    var products = req.body.products;
+    var query = `UPDATE orders SET status = ` + status + ` WHERE id = ` + id + ``;
+    DB.execute(query, function(e, r) {
+      Async.series([
+        function(callback) {
+          DB.origin.query("delete from orders_products where order_id = ?", [id], (err, res) => { callback(err, res) });
+        },
+        function(callback) {
+          Async.each(products, (product, cb) => {
+            var entity = {
+              order_id : id, guest_id : order.guest_id, user_id : order.user_id,
+              prod_id : product.id, quantity : product.quantity, created : Date.now()
+            };
+            DB.origin.query("insert into orders_products set ?", entity, function(err, res) { cb() });
+          }, function(err) {
+            callback(err, 'updated')
+          });
+        }
+      ],
+      (err, results) => {
+        response.status = 'ok';
+        res.json(response);
+      });
+    });
+
+
 });
 
 router.post('/updateProduct', (req, res) => {

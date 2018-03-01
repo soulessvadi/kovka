@@ -7,6 +7,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { OrderComponent } from './orders/order.component';
 import { AuthComponent } from './auth/auth.component';
 import { ProductComponent } from './shop/product.component';
+import { SiteMenuComponent } from './site/menu.component';
+import { SiteSliderComponent } from './site/slider.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,14 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'site-menu',
+    component: SiteMenuComponent
+  },
+  {
+    path: 'site-slider',
+    component: SiteSliderComponent
   },
   {
     path: 'auth',

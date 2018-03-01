@@ -1,0 +1,192 @@
+<div class="modal-custom-wrapper" *ngIf="selected_menu">
+	<div class="modal-custom modal fade bd-example-modal-lg" [ngClass]="{'show': selected_menu }" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="padding-right: 17px; display: block;">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title" id="myLargeModalLabel">Настройки меню <strong>&laquo;{{ selected_menu.name }}&raquo;</strong></h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="selected_menu = null">
+	          <span aria-hidden="true">×</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+			<div class="contact-form col-12 pl-0 pr-0">
+                <div class="row">
+            		<div class="col">
+	              		<div class="form-group">
+	                        <input type="text" class="form-control" [(ngModel)]="selected_menu.name">
+	              		</div>
+              		</div>
+                	<div class="col">
+	              		<div class="form-group">
+	                        <input type="text" class="form-control" readonly>
+	              		</div>
+	              	</div>
+                	<div class="col-2">
+	              		<div class="form-group">
+	                        <input type="number" class="form-control" [(ngModel)]="selected_menu.order">
+	              		</div>
+	              	</div>
+              	</div>
+              	<div class="row">
+              		<div class="col">
+	              		<div class="form-group">
+	                        <textarea class="form-control textarea" rows="1" [(ngModel)]="selected_menu.seo_title"></textarea>
+	              		</div>
+              		</div>
+                </div>
+              	<div class="row">
+              		<div class="col">
+	              		<div class="form-group">
+	                        <textarea class="form-control textarea" rows="1" [(ngModel)]="selected_menu.seo_keys"></textarea>
+	              		</div>
+              		</div>
+                </div>
+              	<div class="row">
+              		<div class="col">
+	              		<div class="form-group">
+	                        <textarea class="form-control textarea" rows="1" [(ngModel)]="selected_menu.seo_desc"></textarea>
+	              		</div>
+              		</div>
+                </div>
+                <div class="row mb-4">
+	                <div class="col text-center">
+                      <h6 class="mb-2 mt-2">Публикация</h6>
+			          <label class="switch">
+			            <input type="checkbox" [(ngModel)]="selected_menu.publish" [checked]="selected_menu.publish">
+			            <span class="slider"></span>
+			          </label>
+	              	</div>
+	                <div class="col text-center">
+                      <h6 class="mb-2 mt-2">В футере</h6>
+			          <label class="switch">
+			            <input type="checkbox" [(ngModel)]="selected_menu.in_footer" [checked]="selected_menu.in_footer">
+			            <span class="slider"></span>
+			          </label>
+	              	</div>
+	                <div class="col text-center">
+                      <h6 class="mb-2 mt-2">В хедере</h6>
+			          <label class="switch">
+			            <input type="checkbox" [(ngModel)]="selected_menu.in_header" [checked]="selected_menu.in_header">
+			            <span class="slider"></span>
+			          </label>
+	              	</div>
+	                <div class="col text-center">
+                      <h6 class="mb-2 mt-2">Каталог</h6>
+			          <label class="switch">
+			            <input type="checkbox" [(ngModel)]="selected_menu.catalog" [checked]="selected_menu.catalog">
+			            <span class="slider"></span>
+			          </label>
+	              	</div>
+              	</div>
+                <div class="row">
+	                <div class="col">
+	                  	<button type="submit" class="btn main-btn float-right" (click)="saveChanges(selected_menu)">Сохранить</button>
+	              	</div>
+              	</div>
+            </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+<div class="col-xs-12">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #f4f4f4!important;">
+    <div class="collapse navbar-collapse"></div>
+      <ul class="pagination pagination-sm justify-content-center" style="margin:10px 0;">
+        <li class="page-item" *ngIf="pagination?.length > 1">
+          <a routerLink="/shop/{{ page_prev }}" class="page-link" aria-label="Предыдущая"  (click)="navtopage(page_prev)">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Предыдущая</span></a>
+        </li>
+        <li class="page-item" *ngFor="let page of pagination" [class.active]="page === page_current">
+          <a routerLink="/shop/{{ page }}" class="page-link"  (click)="navtopage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" *ngIf="pagination?.length > 1">
+          <a routerLink="/shop/{{ page_next }}" class="page-link" aria-label="Следующая"  (click)="navtopage(page_next)">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Следующая</span>
+          </a>
+        </li>
+      </ul>
+  </nav>
+
+  <table class="table table-striped mb-0">
+    <thead>
+      <tr>
+		<th style="width:5%;" scope="col">#</th>
+		<th style="width:15%;" scope="col">Название</th>
+		<th style="width:10%;" scope="col">URL</th>
+		<th style="width:5%;" scope="col">Порядок</th>
+		<th style="width:10%;" scope="col">SEO/title</th>
+		<th style="width:10%;" scope="col">SEO/keywords</th>
+		<th style="width:10%;" scope="col">SEO/description</th>
+		<th style="width:7%;" scope="col">Публикация</th>
+		<th style="width:7%;" scope="col">Каталог</th>
+		<th style="width:7%;" scope="col">В хедере</th>
+		<th style="width:7%;" scope="col">В футере</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="menus?.length">
+      <tr *ngFor="let menu of menus; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td class="table-tr-hover" title="Редактирование экземпляра" (click)="viewDetails(menu)"><strong>{{ menu.name }}</strong></td>
+			<td>{{ menu.alias }}</td>
+			<td><input class="form-control" type="number" [(ngModel)]="menu.order" (change)="menuChanged(menu)"></td>
+			<td><input class="form-control" type="text" readonly [(ngModel)]="menu.seo_title"></td>
+			<td><input class="form-control" type="text" readonly [(ngModel)]="menu.seo_keys"></td>
+			<td><input class="form-control" type="text" readonly [(ngModel)]="menu.seo_desc"></td>
+	        <td>
+	          <label class="switch">
+	            <input type="checkbox" [(ngModel)]="menu.publish" [checked]="menu.publish" (change)="menuChanged(menu)">
+	            <span class="slider"></span>
+	          </label>
+	        </td>
+       		<td>
+	          <label class="switch">
+	            <input type="checkbox" [(ngModel)]="menu.catalog" [checked]="menu.catalog" (change)="menuChanged(menu)">
+	            <span class="slider"></span>
+	          </label>
+	        </td>
+	       	<td>
+	          <label class="switch">
+	            <input type="checkbox" [(ngModel)]="menu.in_header" [checked]="menu.in_header" (change)="menuChanged(menu)">
+	            <span class="slider"></span>
+	          </label>
+	        </td>
+	       	<td>
+	          <label class="switch">
+	            <input type="checkbox" [(ngModel)]="menu.in_footer" [checked]="menu.in_footer" (change)="menuChanged(menu)">
+	            <span class="slider"></span>
+	          </label>
+	        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="!menus?.length">
+      <tr style="text-align: center;letter-spacing: 2px;font-size: 18px;">
+        <td colspan="10">Список пуст</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #f4f4f4!important;">
+    <div class="collapse navbar-collapse"></div>
+      <ul class="pagination pagination-sm justify-content-center" style="margin:10px 0;">
+        <li class="page-item" *ngIf="pagination?.length > 1">
+          <a routerLink="/shop/{{ page_prev }}" class="page-link" aria-label="Предыдущая"  (click)="navtopage(page_prev)">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Предыдущая</span></a>
+        </li>
+        <li class="page-item" *ngFor="let page of pagination" [class.active]="page === page_current">
+          <a routerLink="/shop/{{ page }}" class="page-link"  (click)="navtopage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" *ngIf="pagination?.length > 1">
+          <a routerLink="/shop/{{ page_next }}" class="page-link" aria-label="Следующая"  (click)="navtopage(page_next)">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Следующая</span>
+          </a>
+        </li>
+      </ul>
+  </nav>
+
+</div>

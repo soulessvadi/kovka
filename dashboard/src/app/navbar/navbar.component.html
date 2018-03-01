@@ -8,9 +8,15 @@
   <div class="collapse navbar-collapse">
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
-        <a class="nav-link" href="#" routerLink="dashboard">ПАНЕЛЬ</a>
-      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          НАСТРОЙКИ САЙТА
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLinkActive="active" routerLinkActiveOptions="{exact:true}" routerLink="site-menu" href="#">Меню</a>
+          <a class="dropdown-item" routerLinkActive="active" routerLinkActiveOptions="{exact:true}" routerLink="site-slider" href="#">Слайдер</a>
+        </div>
+      </li>    
       <li class="nav-item" routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
         <a class="nav-link" href="#" routerLink="orders">ЗАКАЗЫ</a>
       </li>

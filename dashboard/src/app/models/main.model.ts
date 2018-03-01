@@ -31,6 +31,7 @@ export class OrderProduct {
   is_new: boolean;
 	is_bestseller: boolean;
   quantity: number;
+
 }
 
 export class Order {
@@ -49,4 +50,31 @@ export class Order {
   count: number;
   status: number;
   products: OrderProduct[];
+}
+
+export class Menu {
+  id: number;
+  name: string;
+  alias: string;
+  order: number;
+  publish: number;
+  in_header: number;
+  in_footer: number;
+  catalog: number;
+  seo_title: string;
+  seo_keys: string;
+  seo_desc: string;
+}
+
+export class Slide {
+  id: number;
+  name: string;
+  alias: string;
+  cover: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  buttons: string;
+  publish: number;
+  order: number;
 }
