@@ -27,7 +27,15 @@ export class ShopService {
       .toPromise()
         .then(res => res.json())
           .catch(err => {console.log(err)});
-  }  
+  }
+
+  public getOrder(id: number): Promise<Order> {
+    let options = this.getOpts({ p: id });
+    return this.http.get(`${this.api}/getOrder`, options)
+      .toPromise()
+        .then(res => res.json())
+          .catch(err => {console.log(err)});
+  }
 
 	public getProducts(page : number, keyword: string): Promise<ResponseProducts> {
     let options = this.getOpts({p:page, q:keyword});

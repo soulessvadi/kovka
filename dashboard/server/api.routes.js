@@ -23,6 +23,33 @@ router.use(function(req, res, next) {
   next();
 });
 
+router.get('/getOrder', (req, res) => {
+    response = {};
+    var self = this,
+        carriers = ['Не выбран', 'Нова Пошта', 'ИнТайм', 'Деливери'];
+        id = req.query.p,
+        query = "SELECT *, (id + 20000) as number FROM orders WHERE id = " + id + " LIMIT 1";
+    DB.execute(query, function(err, row) {
+      if(row) {
+        response.order = row.pop();
+        response.order.carrier_name = carriers[response.order.carrier];
+        response.order.amount = 0;
+        response.status = 'ok';
+        var pquery = "SELECT P.*, OP.quantity, OP.id as op_id FROM orders_products as OP "+
+        "LEFT JOIN products as P on P.id = OP.prod_id WHERE order_id = " + id + ";"
+        DB.execute(pquery, function(err, products) {
+          if(products) {
+            response.order.products = products;
+          }
+          res.json(response);
+        });
+      } else {
+        response.status = err;
+        res.json(response);
+      }
+    });
+});
+
 router.get('/getOrders', (req, res) => {
     response = {};
     response.orders = [];

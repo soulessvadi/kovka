@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location, DecimalPipe, DatePipe } from '@angular/common';
 import { Product, Order } from '../models/main.model';
 import { ShopService } from '../services/shop.service';
+import { OrderComponent } from './order.component';
 
 @Component({
   selector: 'app-orders',
@@ -15,11 +16,12 @@ export class OrdersComponent implements OnInit {
   private page_current: number = 1;
   private page_prev: number = 1;
   private page_next: number = 1;
+  private keyword: string;
   private pagination: number[];
-  private orders: Order[];
   private orders_count: number;
   private orders_per_page: number;
-  private keyword: string;
+  private orders: Order[];
+  private order_selected: Order;
 
   constructor(
     private _service: ShopService,
@@ -63,7 +65,7 @@ export class OrdersComponent implements OnInit {
   }
 
   viewDetails(order: Order): void {
-  	this._service.storeOrder(order);
+    this.order_selected = order;
     this.router.navigate(['/orders/entity', order.id]);
   }
 

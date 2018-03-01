@@ -15,6 +15,24 @@ export class Product {
   is_bestseller: boolean;
 }
 
+export class OrderProduct {
+	id: number;
+  cat_id: number;
+  cat_name: string;
+  alias: string;
+  name: string;
+  sku: string;
+  description: string;
+  cover: string;
+  publish: number;
+  price: number;
+  rank: number;
+  is_stock: boolean;
+  is_new: boolean;
+	is_bestseller: boolean;
+  quantity: number;
+}
+
 export class Order {
   id: number;
   guest_id: string;
@@ -30,5 +48,5 @@ export class Order {
   amount: number;
   count: number;
   status: number;
-  products: Product[];
+  products: OrderProduct[];
 }

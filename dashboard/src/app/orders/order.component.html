@@ -1,17 +1,101 @@
-<div *ngIf="order">
+<div class="modal-custom-wrapper">
+  <div class="modal-custom modal fade" [ngClass]="{'show': order }" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xxl" role="document">
+      <div class="modal-content" *ngIf="order">
+        <div class="modal-header">
+          <h5 class="modal-title"><strong>Заказ #{{order.number}}</strong>  от {{ order.created | date:'dd.MM.yyyy HH:mm' }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm mb-2">
+                Номер заказа: <strong>{{ order.number }}</strong>
+              </div>
+              <div class="col-sm mb-2">
+                Заказчик: <strong>{{ order.name }}</strong>
+              </div>
+              <div class="col-sm mb-2">
+                Телефон: <strong>{{ order.phone }}</strong>
+              </div>
+              <div class="col-sm mb-2">
+                Email: <strong>{{ order.email }}</strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm mb-2">
+                Комментарий: <strong>{{ order.comment }}</strong>
+              </div>
+              <div class="col-sm mb-2">
+                Перевозчик: <strong>{{ order.carrier_name }}</strong>
+              </div>
+              <div class="col-sm mb-2">
+                Создан: <strong>{{ order.created | date:'dd.MM.yyyy HH:mm' }}</strong>
+              </div>
+              <div class="col-sm mb-2">
+                Позиций: <strong>{{ order.products?.length }}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+              <div class="card mt-4">
+                <div class="card-header bg-dark text-light">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <h5 class="float-left">Содержимое</h5>
+                    <form class="form-inline float-right">
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <input type="text" placeholder="код товара" value="" class="form-control">
+                      </div>
+                      <button class="btn btn-outline-info">Добавить</button>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="card-body">
+                  <div *ngIf="!order.products?.length">
+                    <h5 class="text-center">Заказ пуст</h5>
+                  </div>
+                  <div *ngFor="let op of order.products">
+                    <div class="row">
+                      <div class="col-xs-2 col-md-2">
+                        <img class="img-responsive" style="height:70px; width:auto; max-width:105px;" src="http://localhost:3000/img/products/{{ op.cover }}" alt="{{ op.sku }}">
+                      </div>
+                      <div class="col-xs-4 col-md-6">
+                        <h4 class="product-name"><strong>{{ op.name }}</strong></h4><h4><small>{{ op.sku }}</small></h4>
+                      </div>
+                      <div class="col-xs-6 col-md-4 row">
+                        <div class="col-xs-4 col-md-4 text-right">
+                          <h5 class="mb-1 mt-1"><strong>{{ op.price | number }} <span class="text-muted">X</span></strong></h5>
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                          <input type="number" class="form-control input-sm" value="{{ op.quantity }}">
+                        </div>
+                        <div class="col-xs-4 col-md-4">
+                          <button type="button" class="btn btn-outline-info btn-xs">Удалить</button>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
 
-  <h2>Заказ #{{ order.number }}</h2>
-  <div><span>id: </span>{{ order.number }}</div>
-  <div>
-    <label>
-      <input [(ngModel)]="order.name" placeholder="name"/>
-    </label>
-    <label>
-      <input [(ngModel)]="order.phone" placeholder="phone"/>
-    </label>
-    <label>
-      <input [(ngModel)]="order.email" placeholder="email"/>
-    </label>
+                </div>
+                <div class="card-footer">
+                    <div class="col-6">
+                      <h5 class="float-left mb-2 mt-2 mr-2">ОБРАБОТАН:</h5>
+                      <label class="switch float-left mb-2 mt-2 ">
+                        <input type="checkbox" [(ngModel)]="order.status" [checked]="order.status" (change)="updateOrder(order)">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                    <div class="float-right"><h3>К оплате: <b> {{ order.amount }} ₴</b></h3> </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Сохранить</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
